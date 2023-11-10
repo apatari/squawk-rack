@@ -16,6 +16,9 @@ if __name__ == '__main__':
         print("Starting seed...")
         # Seed code goes here!
 
+        print("Deleting tables...")
+        User.query.delete()
+
         print("Adding users...")
 
         user1 = User(username="user1")
@@ -24,3 +27,9 @@ if __name__ == '__main__':
         user1.password_hash = "user1"
         user2.password_hash = "user2"
         user3.password_hash = "user3"
+
+        db.session.add(user1)
+        db.session.add(user2)
+        db.session.add(user3)
+
+        db.session.commit()
