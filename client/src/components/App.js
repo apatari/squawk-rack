@@ -23,8 +23,8 @@ function App() {
 
   if (!user) return (
     <div>
-      <Header/>
-      <Login/>
+      <Header user={user} />
+      <Login />
     </div>
   )
 

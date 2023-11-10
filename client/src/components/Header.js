@@ -2,12 +2,19 @@ import React from "react";
 import { Navbar, Nav, Image } from "react-bootstrap";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
-function Header(){
+function Header({ user }){
 
     const linkStyles = {
         textDecoration: 'none',
         color:'white'
     }
+
+    let textDec = 'none'
+    if (user) {
+        textDec = 'underline'
+    }
+
+
 // NOTE: Swap nav.links out for the NavLink once react router is up and running!
     return (
         <div>
@@ -28,7 +35,7 @@ function Header(){
                         exact to="/" 
                         className='text-white me-5 ms-3' 
                         style={linkStyles} 
-                        activeStyle={{textDecoration: 'overline'}} 
+                        activeStyle={{textDecoration: textDec}} 
                     >
                         My Workouts
                     </NavLink>
@@ -36,7 +43,7 @@ function Header(){
                         exact to="/explore" 
                         className='text-white me-5' 
                         style={linkStyles} 
-                        activeStyle={{textDecoration: 'overline'}} 
+                        activeStyle={{textDecoration: textDec}} 
                     >
                         Explore + Find
                     </NavLink>
@@ -44,7 +51,7 @@ function Header(){
                         to="/create" 
                         className='text-white me-5'
                         style={linkStyles} 
-                        activeStyle={{textDecoration: 'overline'}} 
+                        activeStyle={{textDecoration: textDec}} 
                     >
                         Create
                     </NavLink>
