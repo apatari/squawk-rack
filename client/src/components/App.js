@@ -24,7 +24,7 @@ function App() {
   if (!user) return (
     <div>
       <Header user={user} />
-      <Login />
+      <Login onLogin={setUser}/>
     </div>
   )
 

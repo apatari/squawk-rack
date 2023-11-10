@@ -10,7 +10,7 @@ function Header({ user }){
     }
 
     let textDec = 'none'
-    if (user) {
+    if (true) {
         textDec = 'underline'
     }
 
@@ -20,7 +20,7 @@ function Header({ user }){
         <div>
             
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="#home">
+                <Navbar.Brand >
                 <Image
                 className="m-3"
                     alt=""

@@ -60,7 +60,7 @@ class Logout(Resource):
             session['user_id'] = None
             return {}, 204
         else:
-            return {"message": "error, cannot log out, you are not logged in"}, 401
+            return {"errors": "Error: cannot log out, you are not logged in"}, 401
         
 class CheckSession(Resource):
 
@@ -75,7 +75,7 @@ class CheckSession(Resource):
             }
             return response_body, 200
         else:
-            return {"message": "Error: user not logged in"}, 401
+            return {"errors": "Error: user not logged in"}, 401
 
 
 
