@@ -6,8 +6,28 @@ import "bootswatch/dist/morph/bootstrap.min.css";
 import MyWorkouts from "./MyWorkouts";
 import Explore from "./Explore";
 import Create from "./Create";
+import Login from "./Login";
 
 function App() {
+
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    fetch("/check_session")
+    .then(r => {
+      if (r.ok) {
+        r.json().then(user => setUser(user))
+      }
+    });
+  }, [])
+
+  if (!user) return (
+    <div>
+      <Header/>
+      <Login/>
+    </div>
+  )
+
   return (
     <div>
       <Header/>
