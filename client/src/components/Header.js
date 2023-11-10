@@ -17,34 +17,38 @@ function Header(){
                 <Image
                 className="m-3"
                     alt=""
-                    src="./squawk-rack-high-resolution-logo.png"
+                    src="./sr2.png"
                     width="150"
                     height="150"
                     rounded
                 />{' '}
                 </Navbar.Brand>
-                <Nav className='p-2 fs-4 text-white'>
-                    <Nav.Link 
-                        href="#home" 
+                <Nav className='p-3 fs-2 text-white'>
+                    <NavLink 
+                        exact to="/" 
                         className='text-white me-5 ms-3' 
                         style={linkStyles} 
-                        activeStyle={{textDecoration: 'overline'}}
+                        activeStyle={{textDecoration: 'overline'}} 
                     >
                         My Workouts
-                    </Nav.Link>
-                    <Nav.Link 
-                        href="#features"
-                        className='text-white me-5 ms-3' 
+                    </NavLink>
+                    <NavLink 
+                        exact to="/explore" 
+                        className='text-white me-5' 
                         style={linkStyles} 
-                        activeStyle={{textDecoration: 'overline'}}
-                    >Explore + Find </Nav.Link>
-                    <Nav.Link 
-                        href="#pricing"
-                        className='text-white me-5 ms-3' 
+                        activeStyle={{textDecoration: 'overline'}} 
+                    >
+                        Explore + Find
+                    </NavLink>
+                    <NavLink 
+                        to="/create" 
+                        className='text-white me-5'
                         style={linkStyles} 
-                        activeStyle={{textDecoration: 'overline'}}
-                    >Create</Nav.Link>
-                </Nav>
+                        activeStyle={{textDecoration: 'overline'}} 
+                    >
+                        Create
+                    </NavLink>
+            </Nav>
             </Navbar>
         </div>
     )
