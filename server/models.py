@@ -1,17 +1,24 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.orm import validates
 
 from config import db, bcrypt
 
 # Models go here!
 
-class User(db.Model):
+class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     _password_hash = db.Column(db.String)
+
+    @validates('username')
+    def validate_username(self, key, name):
+        if not name or not 0 < len(name) < 20:
+            raise ValueError("Name must be 1-20 characters")
+        return name
 
     @hybrid_property
     def password_hash(self):
