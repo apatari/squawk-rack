@@ -17,6 +17,8 @@ function App() {
     .then(r => {
       if (r.ok) {
         r.json().then(user => setUser(user))
+  // Remove once login and user problems are fixed
+        console.log("User is: ", user)
       }
     });
   }, [])

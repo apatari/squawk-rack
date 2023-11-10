@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, Image } from "react-bootstrap";
+import { Navbar, Nav, Image, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 function Header({ user }){
@@ -54,8 +54,14 @@ function Header({ user }){
                         activeStyle={{textDecoration: textDec}} 
                     >
                         Create
-                    </NavLink>
-            </Nav>
+                    </NavLink>  
+                </Nav>
+
+                <Nav.Item className="ms-auto">
+
+                    {Boolean(true)? <Button className="m-5" >Logout</Button> : ""}
+
+                </Nav.Item>
             </Navbar>
         </div>
     )
