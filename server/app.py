@@ -58,7 +58,7 @@ class Logout(Resource):
 
         if user:
             session['user_id'] = None
-            return {}, 204
+            return {}, 200
         else:
             return {"errors": "Error: cannot log out, you are not logged in"}, 401
         

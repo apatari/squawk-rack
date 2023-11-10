@@ -25,14 +25,14 @@ function App() {
 
   if (!user) return (
     <div>
-      <Header user={user} />
+      <Header user={user} setUser={setUser} />
       <Login onLogin={setUser}/>
     </div>
   )
 
   return (
     <div>
-      <Header/>
+      <Header user={user} setUser={setUser}/>
       <Switch>
 
         <Route exact path="/">

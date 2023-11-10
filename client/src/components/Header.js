@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Nav, Image, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
-function Header({ user }){
+function Header({ user, setUser }){
 
     const linkStyles = {
         textDecoration: 'none',
@@ -10,10 +10,18 @@ function Header({ user }){
     }
 
     let textDec = 'none'
-    if (true) {
+    if (user) {
         textDec = 'underline'
     }
 
+    const handleLogoutClick = () => {
+        fetch("/logout", { method: "DELETE" }).then((r) => {
+          if (r.ok) {
+            setUser(null);
+          }
+        });
+        console.log(user)
+      }
 
 // NOTE: Swap nav.links out for the NavLink once react router is up and running!
     return (
@@ -59,7 +67,7 @@ function Header({ user }){
 
                 <Nav.Item className="ms-auto">
 
-                    {Boolean(true)? <Button className="m-5" >Logout</Button> : ""}
+                    {Boolean(user)? <Button className="m-5" onClick={handleLogoutClick}>Logout</Button> : ""}
 
                 </Nav.Item>
             </Navbar>
