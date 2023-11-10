@@ -49,9 +49,41 @@ class Login(Resource):
             return response_body, 200
         else:
             return {"errors": ["Error: invalid username and or password"]}, 401
+        
+class Logout(Resource):
+
+    def delete(self):
+
+        user = User.query.filter_by(id = session.get('user_id')).first()
+
+        if user:
+            session['user_id'] = None
+            return {}, 204
+        else:
+            return {"message": "error, cannot log out, you are not logged in"}, 401
+        
+class CheckSession(Resource):
+
+    def get(self):
+
+        user = User.query.filter_by(id = session.get('user_id')).first()
+
+        if user:
+            response_body = {
+                "id": user.id,
+                "username": user.username,
+            }
+            return response_body, 200
+        else:
+            return {"message": "Error: user not logged in"}, 401
+
+
+
 
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Signup, '/signup', endpoint='signup')
+api.add_resource(Logout, '/logout', endpoint='logout')
+api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
