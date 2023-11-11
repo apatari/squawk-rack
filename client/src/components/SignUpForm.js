@@ -15,21 +15,30 @@ function SignupForm( { signupMode, setSignupMode, onLogin }) {
     }
 
     const handleSubmit = (e) => {
+
+        setErrors([])
+
         e.preventDefault()
-        fetch('/signup', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({username, password}),
-        }).then(r => {
-            if (r.ok) {
-                r.json().then(user =>onLogin(user)) 
-                history.push('/')    
-            } else {
-                r.json().then(err => setErrors(err.errors))
-            }
-        })
+
+        if (password === confirmPassword){
+            
+            fetch('/signup', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({username, password}),
+            }).then(r => {
+                if (r.ok) {
+                    r.json().then(user =>onLogin(user)) 
+                    history.push('/')    
+                } else {
+                    r.json().then(err => setErrors((currentErrors) => [...currentErrors, err.errors]))
+                }
+            })
+        } else {
+            setErrors((currentErrors) => [...currentErrors, "Password confirmation did not match"])
+        }
     }
 
     return (
