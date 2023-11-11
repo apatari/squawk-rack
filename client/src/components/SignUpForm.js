@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Form, Button, Row, Col } from "react-bootstrap";
 
-function SignupForm( { signupMode, setSignupMode }) {
+function SignupForm( { signupMode, setSignupMode, onLogin }) {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -14,8 +14,22 @@ function SignupForm( { signupMode, setSignupMode }) {
         setSignupMode(!signupMode)
     }
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        fetch('/signup', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({username, password}),
+        }).then(r => {
+            if (r.ok) {
+                r.json().then(user =>onLogin(user)) 
+                history.push('/')    
+            } else {
+                r.json().then(err => setErrors(err.errors))
+            }
+        })
     }
 
     return (
@@ -46,7 +60,7 @@ function SignupForm( { signupMode, setSignupMode }) {
                         />
                     </Form.Group>
 
-                    <Form.Group className="m-3" controlId="formBasicPassword">
+                    <Form.Group className="m-3" controlId="formConfirmPassword">
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control 
                             type="password" 
@@ -55,6 +69,9 @@ function SignupForm( { signupMode, setSignupMode }) {
                             onChange={e => setConfirmPassword(e.target.value)} 
                         />
                     </Form.Group>
+                    {errors.map((err) => (
+                        <p className="text-danger m-3" key={err}>{err}</p>
+                    ))}
                     <Row className="ms-auto">
                         <Button className="m-3 btn btn-outline-success w-25 ms-auto" variant="primary" type="submit">
                         Sign Up

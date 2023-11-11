@@ -30,7 +30,7 @@ class Signup(Resource):
             return user.to_dict(), 201
         
         except Exception as err:
-            return {"errors": [repr(err)]}, 422
+            return {"errors": [str(err)]}, 422
         
 class Login(Resource):
 
@@ -48,7 +48,7 @@ class Login(Resource):
             }
             return response_body, 200
         else:
-            return {"errors": ["Error: invalid username and or password"]}, 401
+            return {"errors": ["Invalid username and or password"]}, 401
         
 class Logout(Resource):
 
@@ -75,7 +75,7 @@ class CheckSession(Resource):
             }
             return response_body, 200
         else:
-            return {"errors": "Error: user not logged in"}, 401
+            return {"errors": "User not logged in"}, 401
 
 
 
