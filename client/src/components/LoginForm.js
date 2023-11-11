@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,  } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function LoginForm({ onLogin, setSignupMode, signupMode }){
 
-        const [username, setUsername] = useState("")
-        const [password, setPassword] = useState("")
-        const [errors, setErrors] = useState([])
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [errors, setErrors] = useState([])
+    const history = useHistory()
         
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -17,7 +19,8 @@ function LoginForm({ onLogin, setSignupMode, signupMode }){
             body: JSON.stringify({username, password}),
         }).then(r => {
             if (r.ok) {
-                r.json().then(user =>onLogin(user))     
+                r.json().then(user =>onLogin(user)) 
+                history.push('/')    
             } else {
                 r.json().then(err => setErrors(err.errors))
             }
