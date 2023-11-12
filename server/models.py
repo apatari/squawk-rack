@@ -21,6 +21,7 @@ class User(db.Model, SerializerMixin):
         if name in [user.username for user in User.query.all()]:
             raise ValueError("Sorry, that username is not available")
         return name
+    
 
     @hybrid_property
     def password_hash(self):
@@ -28,6 +29,8 @@ class User(db.Model, SerializerMixin):
 
     @password_hash.setter
     def password_hash(self, password):
+        if len(password) < 4:
+            raise ValueError("Passwords must be 4 or more characters")
         password_hash = bcrypt.generate_password_hash(
             password.encode('utf-8'))
         self._password_hash = password_hash.decode('utf-8')
