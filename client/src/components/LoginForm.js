@@ -11,6 +11,8 @@ function LoginForm({ onLogin, setSignupMode, signupMode }){
         
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        if (password && username) {
         fetch("/login", {
             method: "POST",
             headers: {
@@ -25,6 +27,11 @@ function LoginForm({ onLogin, setSignupMode, signupMode }){
                 r.json().then(err => setErrors(err.errors))
             }
         })
+        } else {
+            setErrors(["Please enter a username and password"])
+        }
+
+        
     }
 
     const handleSignupClick = () => {
@@ -60,7 +67,9 @@ function LoginForm({ onLogin, setSignupMode, signupMode }){
                             onChange={e => setPassword(e.target.value)} 
                         />
                     </Form.Group>
-                
+                    {errors.map((err) => (
+                        <p className="text-danger m-3" key={err}>{err}</p>
+                    ))}
                     <Button className="m-3" variant="primary" type="submit">
                         Submit
                     </Button>

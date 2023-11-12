@@ -48,7 +48,7 @@ class Login(Resource):
             }
             return response_body, 200
         else:
-            return {"errors": ["Invalid username and or password"]}, 401
+            return {"errors": ["Invalid username and/or password"]}, 401
         
 class Logout(Resource):
 
