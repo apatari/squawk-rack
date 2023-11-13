@@ -41,3 +41,21 @@ class User(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'User {self.username}, ID: {self.id}'
+    
+class Workout(db.Model, SerializerMixin):
+    __tablename__ = 'workouts'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True, nullable=False)
+    details = db.Column(db.String)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+    @validates('name')
+    def validate_name(self, key, name):
+        if not name or not len(name):
+            raise ValueError("Must provide a name")
+        return name
+
+    def __repr__(self):
+        return f'Workout: {self.name}, ID: {self.id}'
