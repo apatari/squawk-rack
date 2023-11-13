@@ -77,9 +77,15 @@ class CheckSession(Resource):
         else:
             return {"errors": "User not logged in"}, 401
 
+class WorkoutIndex(Resource):
+
+    def get(self):
+        workouts = [workout.to_dict() for workout in Workout.query.all()]
+
+        return workouts, 200
 
 
-
+api.add_resource(WorkoutIndex, '/workouts', endpoint='workouts')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(Logout, '/logout', endpoint='logout')

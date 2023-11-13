@@ -51,11 +51,41 @@ class Workout(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
+    exercises = db.relationship('Exercise', back_populates='workout')
+
     @validates('name')
     def validate_name(self, key, name):
         if not name or not len(name):
-            raise ValueError("Must provide a name")
+            raise ValueError("Must provide a name for the workout")
         return name
 
     def __repr__(self):
         return f'Workout: {self.name}, ID: {self.id}'
+    
+class Exercise(db.Model, SerializerMixin):
+    __tablename__ = 'exercises'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    sets = db.Column(db.Integer, nullable=False)
+    reps = db.Column(db.Integer, nullable=False)
+    order_number = db.Column(db.Integer, nullable=False)
+    workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'))
+
+    workout = db.relationship('Workout', back_populates="exercises")
+
+    @validates('name')
+    def validate_name(self, key, name):
+        if not name or not len(name):
+            raise ValueError("Must provide a name for the exercise")
+        return name
+    
+    @validates('sets', 'reps', 'order_number')
+    def validate_numbers(self, key, num):
+        if not 0 < num < 100:
+            raise ValueError("Must provide an integer from 1 to 100")
+        return num
+
+
+    def __repr__(self):
+        return f'Exercise: {self.name}, ID: {self.id}, from workout{self.workout.name}'
