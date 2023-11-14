@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Image, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import logoPic from "../images/sr2.png"
 
 function Header({ user, setUser }){
 
@@ -23,7 +24,7 @@ function Header({ user, setUser }){
         console.log(user)
       }
 
-// NOTE: Swap nav.links out for the NavLink once react router is up and running!
+
     return (
         <div>
             
@@ -31,8 +32,8 @@ function Header({ user, setUser }){
                 <Navbar.Brand >
                 <Image
                 className="m-3"
-                    alt=""
-                    src="./sr2.png"
+                    alt="Squawk Logo"
+                    src={logoPic}
                     width="150"
                     height="150"
                     rounded

@@ -7,6 +7,7 @@ import MyWorkouts from "./MyWorkouts";
 import Explore from "./Explore";
 import Create from "./Create";
 import Login from "./Login";
+import WorkoutDetail from "./WorkoutDetail";
 
 function App() {
 
@@ -17,8 +18,7 @@ function App() {
     .then(r => {
       if (r.ok) {
         r.json().then(user => setUser(user))
-  // Remove once login and user problems are fixed
-        console.log("User is: ", user)
+
       }
     });
   }, [])
@@ -45,6 +45,9 @@ function App() {
 
         <Route exact path="/create">
           <Create/>
+        </Route>
+        <Route path ='/workouts/:workout_id' >
+          <WorkoutDetail />
         </Route>
       </Switch>
     </div>
