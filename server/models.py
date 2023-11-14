@@ -53,6 +53,8 @@ class Workout(db.Model, SerializerMixin):
 
     exercises = db.relationship('Exercise', back_populates='workout')
 
+    serialize_rules = ('-exercises.workout',)
+
     @validates('name')
     def validate_name(self, key, name):
         if not name or not len(name):
@@ -73,6 +75,8 @@ class Exercise(db.Model, SerializerMixin):
     workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'))
 
     workout = db.relationship('Workout', back_populates="exercises")
+
+    serialize_rules = ('-workout.exercises',)
 
     @validates('name')
     def validate_name(self, key, name):
