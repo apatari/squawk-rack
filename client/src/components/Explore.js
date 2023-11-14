@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col } from "react-bootstrap";
-import WorkoutCard from './WorkoutCard'
+import WorkoutCard from './cards/WorkoutCard'
 
 function Explore(){
 

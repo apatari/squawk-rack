@@ -99,7 +99,17 @@ class WorkoutIndex(Resource):
 
         return workouts, 200
 
+class WorkoutByID(Resource):
 
+    def get(self, id):
+        workout = Workout.query.filter_by(id=id).first()
+
+        if workout:
+            return workout.to_dict(), 200
+        else:
+            return {"error": "workout not found"}, 404
+
+api.add_resource(WorkoutByID, '/api/workouts/<int:id>', endpoint='workout_by_id')
 api.add_resource(WorkoutIndex, '/api/workouts', endpoint='workouts')
 api.add_resource(Login, '/api/login', endpoint='login')
 api.add_resource(Signup, '/api/signup', endpoint='signup')
