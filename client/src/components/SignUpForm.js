@@ -22,7 +22,7 @@ function SignupForm( { signupMode, setSignupMode, onLogin }) {
 
         if (password === confirmPassword){
             
-            fetch('/signup', {
+            fetch('/api/signup', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

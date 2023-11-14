@@ -7,7 +7,7 @@ function Explore(){
     const [workouts, setWorkouts] = useState([])
 
     useEffect(() => {
-        fetch('/workouts')
+        fetch('/api/workouts')
         .then(res => res.json())
         .then(data => setWorkouts(data))
     }, [])

@@ -16,7 +16,7 @@ function Header({ user, setUser }){
     }
 
     const handleLogoutClick = () => {
-        fetch("/logout", { method: "DELETE" }).then((r) => {
+        fetch("/api/logout", { method: "DELETE" }).then((r) => {
           if (r.ok) {
             setUser(null);
           }

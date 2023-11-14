@@ -13,7 +13,7 @@ function LoginForm({ onLogin, setSignupMode, signupMode }){
         e.preventDefault()
 
         if (password && username) {
-        fetch("/login", {
+        fetch("/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

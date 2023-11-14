@@ -100,11 +100,11 @@ class WorkoutIndex(Resource):
         return workouts, 200
 
 
-api.add_resource(WorkoutIndex, '/workouts', endpoint='workouts')
-api.add_resource(Login, '/login', endpoint='login')
-api.add_resource(Signup, '/signup', endpoint='signup')
-api.add_resource(Logout, '/logout', endpoint='logout')
-api.add_resource(CheckSession, '/check_session', endpoint='check_session')
+api.add_resource(WorkoutIndex, '/api/workouts', endpoint='workouts')
+api.add_resource(Login, '/api/login', endpoint='login')
+api.add_resource(Signup, '/api/signup', endpoint='signup')
+api.add_resource(Logout, '/api/logout', endpoint='logout')
+api.add_resource(CheckSession, '/api/check_session', endpoint='check_session')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
