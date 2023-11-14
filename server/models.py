@@ -14,6 +14,8 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String, unique=True, nullable=False)
     _password_hash = db.Column(db.String)
 
+    workouts = db.relationship('Workout', back_populates='user')
+
     @validates('username')
     def validate_username(self, key, name):
         if not name or not 0 < len(name) < 20:
@@ -50,7 +52,9 @@ class Workout(db.Model, SerializerMixin):
     details = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+    user = db.relationship('User', back_populates='workouts')
     exercises = db.relationship('Exercise', back_populates='workout')
 
     serialize_rules = ('-exercises.workout',)

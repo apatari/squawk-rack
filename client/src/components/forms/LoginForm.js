@@ -71,7 +71,7 @@ function LoginForm({ onLogin, setSignupMode, signupMode }){
                         <p className="text-danger m-3" key={err}>{err}</p>
                     ))}
                     <Button className="m-3" variant="primary" type="submit">
-                        Submit
+                        Log In
                     </Button>
                 </Form>
                 <Row>

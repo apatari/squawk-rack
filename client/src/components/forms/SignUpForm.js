@@ -50,7 +50,7 @@ function SignupForm( { signupMode, setSignupMode, onLogin }) {
                 </h3>    
                 <Form className="m-4"onSubmit={handleSubmit} >
                     <Form.Group className="m-3" controlId="formBasicUsername">
-                        <Form.Label>Username</Form.Label>
+                        <Form.Label>Username - will be visibile to other users</Form.Label>
                         <Form.Control 
                             type="username" 
                             placeholder="Enter username"

@@ -30,11 +30,12 @@ if __name__ == '__main__':
         user2.password_hash = "user2"
         user3.password_hash = "user3"
 
-        w1 = Workout(name="Push Day", details="A mix of pressing angles geared toward hypertrophy")
-        w2 = Workout(name="Posterior Chain", details="Deadlifts and accesory work.  Adding more text to see how double elipses look  Adding more text to see how double elipses look Adding more text to see how double elipses look")
-        w3 = Workout(name="Squat Fest", details="All the squats")
-        w4 = Workout(name="Weight Sled and Farmer Carry", details="Impress the neighbors. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here.")
-        w5 = Workout(name="Pull Day", details="A Back day focused on strength and work capacity. Superset the second and third sets.")
+        w1 = Workout(user_id=1, name="Push Day", details="A mix of pressing angles geared toward hypertrophy")
+        w2 = Workout(user_id=1, name="Posterior Chain", details="Deadlifts and accesory work.  Adding more text to see how double elipses look  Adding more text to see how double elipses look Adding more text to see how double elipses look")
+        w3 = Workout(user_id=1, name="Squat Fest", details="All the squats")
+        w4 = Workout(user_id=2, name="Weight Sled and Farmer Carry", details="Impress the neighbors. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here.")
+        w5 = Workout(user_id=2, name="Pull Day", details="A Back day focused on strength and work capacity. Superset the second and third sets.")
+        
 
         e1 = Exercise(name="Bench Press", sets=3, reps=10, order_number=1, workout_id=1)
         e2 = Exercise(name="Dips", sets=3, reps=12, order_number=2, workout_id=1)
