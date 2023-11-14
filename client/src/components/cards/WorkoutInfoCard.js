@@ -18,9 +18,13 @@ function WorkoutInfoCard({ workout }) {
                 <Col></Col>
             </Row>
             <Row className="m-2">
-                <Col>Created by: <strong>{workout.user.username}</strong></Col>
-                <Col>Date: <strong>{workout.created_at}</strong></Col>
+                <Col>Created by <strong>{workout.user.username}</strong></Col>
+                <Col>Date <strong>{workout.created_at}</strong></Col>
+                
+            </Row>
+            <Row>
                 <Col></Col>
+                {Boolean(workout.updated_at)? <Col>Updated <strong>{workout.updated_at}</strong></Col> : ""}
             </Row>
 
             
