@@ -7,19 +7,22 @@ function WorkoutInfoCard({ workout }) {
             <h1>{workout.name}</h1>
             <Row  >
                 <Col lg={8}>
-                    <div class="list-group d-md-flex">
-                        <a href="#" class=" list-group-item flex-column align-items-start active">
-                            <p class="mb-1">{workout.details}</p>
+                    <div className="list-group d-md-flex m-1">
+                        <a href="#" className=" list-group-item flex-column align-items-start active">
+                            <p className="mb-1">{workout.details}</p>
                         </a>
                     
                     </div>
                 </Col>
                 <Col></Col>
                 <Col></Col>
-                
-                
-
             </Row>
+            <Row className="m-2">
+                <Col>Created by: <strong>{workout.user.username}</strong></Col>
+                <Col>Date: <strong>{workout.created_at}</strong></Col>
+                <Col></Col>
+            </Row>
+
             
             
         </div>
