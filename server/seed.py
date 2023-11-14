@@ -31,17 +31,35 @@ if __name__ == '__main__':
         user3.password_hash = "user3"
 
         w1 = Workout(name="Push Day", details="A mix of pressing angles geared toward hypertrophy")
-        w2 = Workout(name="Posterior Chain", details="Deadlifts and accesory work")
+        w2 = Workout(name="Posterior Chain", details="Deadlifts and accesory work.  Adding more text to see how double elipses look  Adding more text to see how double elipses look Adding more text to see how double elipses look")
+        w3 = Workout(name="Squat Fest", details="All the squats")
+        w4 = Workout(name="Weight Sled and Farmer Carry", details="Impress the neighbors. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here.")
+        w5 = Workout(name="Pull Day", details="A Back day focused on strength and work capacity. Superset the second and third sets.")
 
         e1 = Exercise(name="Bench Press", sets=3, reps=10, order_number=1, workout_id=1)
         e2 = Exercise(name="Dips", sets=3, reps=12, order_number=2, workout_id=1)
+        e3 = Exercise(name="Deadlifts", sets=3, reps=5, order_number=1, workout_id=2)
+        e4 = Exercise(name="RDL", sets=3, reps=8, order_number=2, workout_id=2)
+        e5 = Exercise(name="Lunges", sets=3, reps=12, order_number=3, workout_id=2)
+        e6 = Exercise(name="Good Mornings", sets=3, reps=10, order_number=4, workout_id=2)
+        e7 = Exercise(name="Box Jumps", sets=3, reps=10, order_number=5, workout_id=2)
 
         db.session.add(user1)
         db.session.add(user2)
         db.session.add(user3)
+
         db.session.add(w1)
         db.session.add(w2)
+        db.session.add(w3)
+        db.session.add(w4)
+        db.session.add(w5)
+
         db.session.add(e1)
         db.session.add(e2)
+        db.session.add(e3)
+        db.session.add(e4)
+        db.session.add(e5)
+        db.session.add(e6)
+        db.session.add(e7)
 
         db.session.commit()

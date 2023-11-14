@@ -79,8 +79,23 @@ class CheckSession(Resource):
 
 class WorkoutIndex(Resource):
 
+    
+        
+
     def get(self):
-        workouts = [workout.to_dict() for workout in Workout.query.all()]
+
+        def add_exercise_summary(workout):
+            summary = ', '.join([exercise['name'] for exercise in workout['exercises']])
+            if len(summary) > 30:
+                summary = summary[:27] + "..."
+            workout["summary"] = summary
+            if len(workout['details']) > 90 :
+                workout['short_details'] = workout['details'][:87] + "..."
+            else:
+                workout['short_details'] = workout['details']
+            return workout
+
+        workouts = [ add_exercise_summary(workout.to_dict()) for workout in Workout.query.all()]
 
         return workouts, 200
 
