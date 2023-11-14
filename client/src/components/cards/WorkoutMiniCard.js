@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 
-function WorkoutCard({ workout }) {
+function WorkoutMiniCard({ workout }) {
 
     const handleFavClick = () => {
         console.log(`Add workout ${workout.id} to favorites`)
@@ -33,4 +33,4 @@ function WorkoutCard({ workout }) {
     )
 }
 
-export default WorkoutCard
+export default WorkoutMiniCard

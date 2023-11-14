@@ -16,6 +16,8 @@ class User(db.Model, SerializerMixin):
 
     workouts = db.relationship('Workout', back_populates='user')
 
+    serialize_rules = ('-workouts.user',)
+
     @validates('username')
     def validate_username(self, key, name):
         if not name or not 0 < len(name) < 20:
@@ -57,7 +59,7 @@ class Workout(db.Model, SerializerMixin):
     user = db.relationship('User', back_populates='workouts')
     exercises = db.relationship('Exercise', back_populates='workout')
 
-    serialize_rules = ('-exercises.workout',)
+    serialize_rules = ('-exercises.workout', '-user.workouts')
 
     @validates('name')
     def validate_name(self, key, name):
