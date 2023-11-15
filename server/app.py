@@ -9,7 +9,7 @@ from flask_restful import Resource
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import User, Workout
+from models import User, Workout, Favorite, Exercise
 
 # Views go here!
 
@@ -113,6 +113,31 @@ class WorkoutByID(Resource):
         else:
             return {"error": "workout not found"}, 404
 
+class FavoriteIndex(Resource):
+
+    def post(self):
+        json = request.get_json()
+        
+
+        fav = Favorite.query.filter_by(user_id=json["user_id"], workout_id=json["workout_id"]).first()
+        if fav:
+            db.session.delete(fav)
+            db.session.commit()
+
+            return {}, 204
+        
+        else:
+            user = User.query.filter_by(id=json["user_id"]).first()
+            workout = Workout.query.filter_by(id=json["workout_id"]).first()
+            new_favorite = Favorite(user_id=user.id, workout_id=workout.id)
+            db.session.add(new_favorite)
+            db.session.commit()
+
+            return new_favorite.to_dict(), 201
+
+
+
+api.add_resource(FavoriteIndex, '/api/favorites', endpoint='favorites')
 api.add_resource(WorkoutByID, '/api/workouts/<int:id>', endpoint='workout_by_id')
 api.add_resource(WorkoutIndex, '/api/workouts', endpoint='workouts')
 api.add_resource(Login, '/api/login', endpoint='login')
