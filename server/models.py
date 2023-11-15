@@ -65,7 +65,15 @@ class Workout(db.Model, SerializerMixin):
     def validate_name(self, key, name):
         if not name or not len(name):
             raise ValueError("Must provide a name for the workout")
+        if len(name) > 40:
+            raise ValueError("Name must be 40 characters or fewer")
         return name
+    
+    @validates('details')
+    def validate_details(self, key, details):
+        if len(details) > 1000:
+            raise ValueError("Must be 1000 characters or fewer")
+        return details
 
     def __repr__(self):
         return f'Workout: {self.name}, ID: {self.id}'
