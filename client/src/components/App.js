@@ -40,7 +40,7 @@ function App() {
         </Route>
 
         <Route exact path="/explore">
-          <Explore/>
+          <Explore user={user} />
         </Route>
 
         <Route exact path="/create">
