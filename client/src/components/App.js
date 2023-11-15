@@ -36,7 +36,7 @@ function App() {
       <Switch>
 
         <Route exact path="/">
-          <MyWorkouts/>
+          <MyWorkouts user={user} />
         </Route>
 
         <Route exact path="/explore">

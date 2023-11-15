@@ -17,7 +17,7 @@ function WorkoutDetail({ user }) {
             res => {if (res.ok) 
                 {res.json()
                     .then(data => setWorkout(data))
-                    .then(determineFavorite)
+                    
                 }}
             )
             
@@ -53,8 +53,7 @@ function WorkoutDetail({ user }) {
             },
             body: JSON.stringify({"user_id": user.id, "workout_id": workout.id})
         })
-
-        setIsFav(!isFav)
+        .then(setIsFav(!isFav))
     }
 
     if (workout) {

@@ -1,10 +1,17 @@
 import React from "react";
+import MyWorkoutList from "./cards/MyWorkoutList";
 
-function MyWorkouts(){
+function MyWorkouts({ user }){
     return (
-        <h1>
-            My Workouts
-        </h1>
+        <div>
+            <h2 className="m-4" >
+                Welcome, {user.username}
+            </h2>
+
+            <MyWorkoutList user={user} />
+        </div>
+        
+
     )
 }
 
