@@ -4,10 +4,10 @@ import { Row, Col } from "react-bootstrap";
 function WorkoutInfoCard({ workout }) {
     return (
         <div>
-            <h1>{workout.name}</h1>
+            <h1><strong>{workout.name}</strong></h1>
             <Row  >
                 <Col lg={8}>
-                    <div className="fs-5 alert-primary d-md-flex m-1 p-2 text-dark rounded-2">
+                    <div className="fs-5 alert-info d-md-flex m-1 p-2 text-dark rounded-2">
                         <div className="  flex-column align-items-start active">
                             <p className="mb-1">{workout.details}</p>
                         </div>
