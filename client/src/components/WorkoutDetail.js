@@ -4,10 +4,12 @@ import WorkoutInfoCard from "./cards/WorkoutInfoCard";
 import ExerciseList from "./cards/ExerciseList";
 import { Button } from "react-bootstrap";
 
-function WorkoutDetail() {
+function WorkoutDetail({ user }) {
 
     const { workout_id } = useParams()
     const [workout, setWorkout] = useState(null)
+    const [isFav, setIsFav] = useState(false)
+    
 
     useEffect(() => {
         fetch(`/api/workouts/${workout_id}`)
@@ -17,7 +19,38 @@ function WorkoutDetail() {
                     .then(data => setWorkout(data))
                 }}
             )
+            .then(determineFavorite)
     }, [])
+
+    const determineFavorite = () => {
+        if (workout) {
+            workout.favorites.forEach(favorite => {
+            if (favorite.user_id === user.id) {
+                setIsFav(true)
+            }
+        })
+        }
+       
+    }
+
+    const handleFavClick = () => {
+        const curr_count = workout.favorite_count
+        if (isFav) {
+            setWorkout({...workout, "favorite_count": curr_count - 1})
+        } else {
+            setWorkout({...workout, "favorite_count": curr_count + 1})
+        }
+        
+        fetch('/api/favorites', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({"user_id": user.id, "workout_id": workout.id})
+        })
+
+        .then(setIsFav((currentFav) => !currentFav))
+    }
 
     if (workout) {
         return (
@@ -25,7 +58,10 @@ function WorkoutDetail() {
                 <WorkoutInfoCard workout={workout} />
                 <ExerciseList exercises = {workout.exercises} />
                 <div className="w-50 d-flex m-3" >
-                    <Button className="btn btn-outline-success" >Add to favorites</Button>
+                    
+                    {isFav?
+                        <Button className="btn btn-outline-warning" onClick={handleFavClick}>Remove from favorites</Button>:
+                        <Button className="btn btn-outline-success" onClick={handleFavClick}>Add to favorites</Button>}
                     <Button className="ms-auto btn btn-outline-light" >Review workout</Button>
                 </div>
                 

@@ -47,7 +47,7 @@ function App() {
           <Create/>
         </Route>
         <Route path ='/workouts/:workout_id' >
-          <WorkoutDetail />
+          <WorkoutDetail user={user} />
         </Route>
       </Switch>
     </div>
