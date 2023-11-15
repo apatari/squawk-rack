@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Card, Badge, Row, Col } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 
-function WorkoutMiniCard({ workout, setWorkouts, user }) {
+function WorkoutMiniCard({ workout, user }) {
 
     const [isFav, setIsFav] = useState(false)
+    const [favCount, setFavCount] = useState(workout.favorite_count)
 
     const handleFavClick = () => {
+        if (isFav) {
+            setFavCount(current => current - 1)
+        } else {
+            setFavCount(current => current + 1)
+        }
 
         fetch('/api/favorites', {
             method: "POST",
@@ -15,9 +21,8 @@ function WorkoutMiniCard({ workout, setWorkouts, user }) {
             },
             body: JSON.stringify({"user_id": user.id, "workout_id": workout.id})
         })
-        .then(fetch('/api/workouts')
-        .then(res => res.json())
-        .then(data => setWorkouts(data))).then(setIsFav((currentFav) => !currentFav))
+
+        .then(setIsFav((currentFav) => !currentFav))
     }
 
     const handleReviewClick = () => {
@@ -66,7 +71,7 @@ function WorkoutMiniCard({ workout, setWorkouts, user }) {
                     </Col>
 
                     <Col style={{alignItems: 'center'}} className="d-flex justify-content-end" >
-                    {(workout.favorite_count)? <Badge pill bg='primary'>{workout.favorite_count}</Badge> : ""}
+                    {(favCount)? <Badge pill bg='primary'>{favCount}</Badge> : ""}
                     </Col>
                     
                 </Row>
