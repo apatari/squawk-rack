@@ -17,12 +17,17 @@ function WorkoutDetail({ user }) {
             res => {if (res.ok) 
                 {res.json()
                     .then(data => setWorkout(data))
+                    .then(determineFavorite)
                 }}
             )
-            .then(determineFavorite)
+            
     }, [])
 
-    const determineFavorite = () => {
+    // Adding or removing this line changes behavior significantly.  One is wrong whenever isFav should
+    // start at true, the other starts off looking good but then the button stays yellow and number only decrements
+    useEffect(determineFavorite, [workout])
+
+    function determineFavorite() {
         if (workout) {
             workout.favorites.forEach(favorite => {
             if (favorite.user_id === user.id) {
@@ -49,7 +54,7 @@ function WorkoutDetail({ user }) {
             body: JSON.stringify({"user_id": user.id, "workout_id": workout.id})
         })
 
-        .then(setIsFav((currentFav) => !currentFav))
+        setIsFav(!isFav)
     }
 
     if (workout) {
@@ -69,8 +74,9 @@ function WorkoutDetail({ user }) {
             
         )
     } else {
+        // optional 'missing' message
         return (
-            <h1 className="m-3" >Oops, looks like there's nothing here!</h1>
+            <h1 className="m-3" ></h1>
         )
     }
     
