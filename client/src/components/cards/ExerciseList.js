@@ -3,7 +3,7 @@ import ExerciseCard from "./ExerciseCard";
 
 function ExerciseList({ exercises }) {
     return (
-        <div>
+        <div className="my-4" >
             <h3>Exercises</h3>
             {exercises.map(exercise => {
                 return <ExerciseCard  key={exercise.id} exercise={exercise} />

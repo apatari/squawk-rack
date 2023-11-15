@@ -15,8 +15,11 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
 
     workouts = db.relationship('Workout', back_populates='user')
+    favorites = db.relationship('Favorite', back_populates='user')
+    favorite_workouts = association_proxy('favorites', 'workout', 
+                                          creator=lambda workout_obj: Favorite(workout=workout_obj))
 
-    serialize_rules = ('-workouts.user',)
+    serialize_rules = ('-workouts.user', '-favorite_workouts.user', '-favorites.user', '-_password_hash')
 
     @validates('username')
     def validate_username(self, key, name):
@@ -58,8 +61,11 @@ class Workout(db.Model, SerializerMixin):
 
     user = db.relationship('User', back_populates='workouts')
     exercises = db.relationship('Exercise', back_populates='workout')
+    favorites = db.relationship('Favorite', back_populates='workout')
+    favorite_users = association_proxy('favorites', 'user', 
+                                          creator=lambda user_obj: Favorite(user=user_obj))
 
-    serialize_rules = ('-exercises.workout', '-user.workouts')
+    serialize_rules = ('-exercises.workout', '-user.workouts', '-favorite_users.workouts', '-favorites.workout', '-user.favorites')
 
     @validates('name')
     def validate_name(self, key, name):
@@ -89,6 +95,7 @@ class Exercise(db.Model, SerializerMixin):
     workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'))
 
     workout = db.relationship('Workout', back_populates="exercises")
+    
 
     serialize_rules = ('-workout.exercises',)
 
@@ -114,3 +121,19 @@ class Exercise(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'Exercise: {self.name}, ID: {self.id}'
+    
+class Favorite(db.Model, SerializerMixin):
+    __tablename__ = 'favorites'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'))
+
+    user = db.relationship('User', back_populates='favorites')
+    workout = db.relationship('Workout', back_populates='favorites')
+
+    serialize_only = ('id', 'user_id', 'workout_id')
+    # serialize_rules = ('-user.signups', '-workout.signups', '-user.favorites', '-workout.favorites')
+
+    def __repr__(self):
+        return f'Favorite {self.id}'

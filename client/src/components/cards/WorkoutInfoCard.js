@@ -1,10 +1,21 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Badge } from "react-bootstrap";
 
 function WorkoutInfoCard({ workout }) {
     return (
         <div>
-            <h1><strong>{workout.name}</strong></h1>
+            <Row>
+                <Col>
+                    <h1><strong>{workout.name}</strong></h1>
+                </Col>
+                <Col>
+                    {(workout.favorite_count)? 
+                        <Badge pill bg='primary'>{workout.favorite_count} favorite
+                            {(workout.favorite_count > 1)?"s"
+                        :''}</Badge> : ""}
+                </Col>
+            </Row>
+            
             <Row  >
                 <Col lg={8}>
                     <div className="fs-5 alert-info d-md-flex m-1 p-2 text-dark rounded-2">

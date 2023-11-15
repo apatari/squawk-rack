@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, User, Workout, Exercise
+from models import db, User, Workout, Exercise, Favorite
 
 if __name__ == '__main__':
     fake = Faker()
@@ -20,6 +20,7 @@ if __name__ == '__main__':
         User.query.delete()
         Workout.query.delete()
         Exercise.query.delete()
+        Favorite.query.delete()
 
         print("Adding users...")
 
@@ -30,8 +31,8 @@ if __name__ == '__main__':
         user2.password_hash = "user2"
         user3.password_hash = "user3"
 
-        w1 = Workout(user_id=1, name="Push Day", details="A mix of pressing angles geared toward hypertrophy")
-        w2 = Workout(user_id=1, name="Posterior Chain", details="Deadlifts and accesory work.  Adding more text to see how double elipses look  Adding more text to see how double elipses look Adding more text to see how double elipses look")
+        w1 = Workout(user_id=1, name="Push Day", details="A mix of pressing angles geared toward hypertrophy. Suggested rest time between bench sets is two and a half minutes, with a minute and a half for the others.  If you have shoulder mobility issues, skullcrushers can be substituted for dips, and incline bench press and lateral raises take the place of overhead press.")
+        w2 = Workout(user_id=1, name="Posterior Chain", details="Deadlifts and accesory work.  Consider performing the accesory work in two compound sets of RDL/lunges and then good mornnings/box jumps.  Can be performed as the DL day of a 5-3-1 program.")
         w3 = Workout(user_id=1, name="Squat Fest", details="All the squats")
         w4 = Workout(user_id=2, name="Weight Sled and Farmer Carry", details="Impress the neighbors. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here.")
         w5 = Workout(user_id=2, name="Pull Day", details="A Back day focused on strength and work capacity. Superset the second and third sets.")
@@ -67,5 +68,19 @@ if __name__ == '__main__':
         db.session.add(e5)
         db.session.add(e6)
         db.session.add(e7)
+
+        db.session.commit()
+
+        f1 = Favorite(user_id=1, workout_id=2)
+        f2 = Favorite(user_id=1, workout_id=4)
+        f3 = Favorite(user_id=1, workout_id=5)
+        f4 = Favorite(user_id=2, workout_id=1)
+        f5 = Favorite(user_id=2, workout_id=2)
+
+        db.session.add(f1)
+        db.session.add(f2)
+        db.session.add(f3)
+        db.session.add(f4)
+        db.session.add(f5)
 
         db.session.commit()

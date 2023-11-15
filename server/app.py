@@ -84,18 +84,19 @@ class WorkoutIndex(Resource):
 
     def get(self):
 
-        def add_exercise_summary(workout):
+        def add_exercise_summary_and_favs(workout):
             summary = ', '.join([exercise['name'] for exercise in workout['exercises']])
             if len(summary) > 30:
                 summary = summary[:27] + "..."
             workout["summary"] = summary
-            if len(workout['details']) > 90 :
-                workout['short_details'] = workout['details'][:87] + "..."
+            if len(workout['details']) > 85 :
+                workout['short_details'] = workout['details'][:82] + "..."
             else:
                 workout['short_details'] = workout['details']
+            workout["favorite_count"] = len(workout["favorites"])
             return workout
 
-        workouts = [ add_exercise_summary(workout.to_dict()) for workout in Workout.query.all()]
+        workouts = [ add_exercise_summary_and_favs(workout.to_dict()) for workout in Workout.query.all()]
 
         return workouts, 200
 
@@ -106,7 +107,9 @@ class WorkoutByID(Resource):
 
         if workout:
             workout.exercises.sort(key=lambda exercise: exercise.order_number)
-            return workout.to_dict(), 200
+            workout = workout.to_dict()
+            workout["favorite_count"] = len(workout["favorites"])
+            return workout, 200
         else:
             return {"error": "workout not found"}, 404
 
