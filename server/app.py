@@ -105,6 +105,7 @@ class WorkoutByID(Resource):
         workout = Workout.query.filter_by(id=id).first()
 
         if workout:
+            workout.exercises.sort(key=lambda exercise: exercise.order_number)
             return workout.to_dict(), 200
         else:
             return {"error": "workout not found"}, 404

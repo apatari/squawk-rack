@@ -98,12 +98,19 @@ class Exercise(db.Model, SerializerMixin):
             raise ValueError("Must provide a name for the exercise")
         return name
     
-    @validates('sets', 'reps', 'order_number')
+    @validates('sets', 'reps')
     def validate_numbers(self, key, num):
-        if not 0 < num < 100:
+        if not 0 < num < 100 or not type(num) == int:
             raise ValueError("Must provide an integer from 1 to 100")
         return num
 
+    @validates('order_number')
+    def validate_order(self, key, num):
+        if not 0 < num < 21:
+            raise ValueError("Must be a number from 1 to 20")
+        if not type(num) == int:
+            raise ValueError("Must be an integer")
+        return num
 
     def __repr__(self):
-        return f'Exercise: {self.name}, ID: {self.id}, from workout{self.workout.name}'
+        return f'Exercise: {self.name}, ID: {self.id}'
