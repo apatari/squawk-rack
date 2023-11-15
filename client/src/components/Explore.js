@@ -17,7 +17,7 @@ function Explore({ user }){
             <h2 className="m-4" >All workouts</h2>
             <Col className="d-flex flex-wrap p-3" >
                 {workouts.map(workout => {
-                    return <WorkoutMiniCard key={workout.id} workout={workout} user={user} />
+                    return <WorkoutMiniCard key={workout.id} workout={workout} setWorkouts={setWorkouts} user={user} />
                 })}
             </Col>
         </div>
