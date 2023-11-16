@@ -32,58 +32,58 @@ if __name__ == '__main__':
         user2.password_hash = "user2"
         user3.password_hash = "user3"
 
-        w1 = Workout(user_id=1, name="Push Day", details="A mix of pressing angles geared toward hypertrophy. Suggested rest time between bench sets is two and a half minutes, with a minute and a half for the others.  If you have shoulder mobility issues, skullcrushers can be substituted for dips, and incline bench press and lateral raises take the place of overhead press.")
-        w2 = Workout(user_id=1, name="Posterior Chain", details="Deadlifts and accesory work.  Consider performing the accesory work in two compound sets of RDL/lunges and then good mornnings/box jumps.  Can be performed as the DL day of a 5-3-1 program.")
-        w3 = Workout(user_id=1, name="Squat Fest", details="All the squats")
-        w4 = Workout(user_id=2, name="Weight Sled and Farmer Carry", details="Impress the neighbors. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here.")
-        w5 = Workout(user_id=2, name="Pull Day", details="A Back day focused on strength and work capacity. Superset the second and third sets.")
-        
-
-        
-        e9 = Exercise(name="Cable Fly", sets=3, reps=12, order_number=4, workout_id=1)
-        e8 = Exercise(name="Overhead Press", sets=3, reps=10, order_number=2, workout_id=1)
-        e1 = Exercise(name="Bench Press", sets=3, reps=10, order_number=1, workout_id=1)
-        e2 = Exercise(name="Dips", sets=3, reps=12, order_number=3, workout_id=1)
-        e3 = Exercise(name="Deadlifts", sets=3, reps=5, order_number=1, workout_id=2)
-        e4 = Exercise(name="RDL", sets=3, reps=8, order_number=2, workout_id=2)
-        e5 = Exercise(name="Lunges", sets=3, reps=12, order_number=3, workout_id=2)
-        e6 = Exercise(name="Good Mornings", sets=3, reps=10, order_number=4, workout_id=2)
-        e7 = Exercise(name="Box Jumps", sets=3, reps=10, order_number=5, workout_id=2)
-
         db.session.add(user1)
         db.session.add(user2)
         db.session.add(user3)
 
-        db.session.add(w1)
-        db.session.add(w2)
-        db.session.add(w3)
-        db.session.add(w4)
-        db.session.add(w5)
+        workouts = [
+            Workout(user_id=1, name="Push Day", details="A mix of pressing angles geared toward hypertrophy. Suggested rest time between bench sets is two and a half minutes, with a minute and a half for the others.  If you have shoulder mobility issues, skullcrushers can be substituted for dips, and incline bench press and lateral raises take the place of overhead press."),
+            Workout(user_id=1, name="Posterior Chain", details="Deadlifts and accesory work.  Consider performing the accesory work in two compound sets of RDL/lunges and then good mornnings/box jumps.  Can be performed as the DL day of a 5-3-1 program."),
+            Workout(user_id=1, name="Squat Fest", details="All the squats"),
+            Workout(user_id=2, name="Weight Sled and Farmer Carry", details="Impress the neighbors. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here. Also checking to see how much text is too much here."),
+            Workout(user_id=2, name="Pull Day", details="A Back day focused on strength and work capacity. Superset the second and third sets."),
 
-        db.session.add(e9)
-        db.session.add(e8)
-        db.session.add(e1)
-        db.session.add(e2)
-        db.session.add(e3)
-        db.session.add(e4)
-        db.session.add(e5)
-        db.session.add(e6)
-        db.session.add(e7)
+        ]
 
+        for workout in workouts:
+            db.session.add(workout)
         db.session.commit()
 
-        f1 = Favorite(user_id=1, workout_id=2)
-        f2 = Favorite(user_id=1, workout_id=4)
-        f3 = Favorite(user_id=1, workout_id=5)
-        f4 = Favorite(user_id=2, workout_id=1)
-        f5 = Favorite(user_id=2, workout_id=2)
+        exercises = [
+            Exercise(name="Cable Fly", sets=3, reps=12, order_number=4, workout_id=1),
+            Exercise(name="Overhead Press", sets=3, reps=10, order_number=2, workout_id=1),
+            Exercise(name="Bench Press", sets=3, reps=10, order_number=1, workout_id=1),
+            Exercise(name="Dips", sets=3, reps=12, order_number=3, workout_id=1),
+            Exercise(name="Deadlifts", sets=3, reps=5, order_number=1, workout_id=2),
+            Exercise(name="RDL", sets=3, reps=8, order_number=2, workout_id=2),
+            Exercise(name="Lunges", sets=3, reps=12, order_number=3, workout_id=2),
+            Exercise(name="Good Mornings", sets=3, reps=10, order_number=4, workout_id=2),
+            Exercise(name="Box Jumps", sets=3, reps=10, order_number=5, workout_id=2),
+            Exercise(name="placeholder", sets=3, reps=10, order_number=1, workout_id=3),
+            Exercise(name="placeholder", sets=3, reps=10, order_number=2, workout_id=3),
+            Exercise(name="placeholder", sets=3, reps=10, order_number=3, workout_id=3),
+            Exercise(name="placeholder", sets=3, reps=10, order_number=4, workout_id=3),
+            
 
-        db.session.add(f1)
-        db.session.add(f2)
-        db.session.add(f3)
-        db.session.add(f4)
-        db.session.add(f5)
+        ]
 
+        for exercise in exercises:
+            db.session.add(exercise)
+        db.session.commit()
+
+             
+        favorites = [
+            Favorite(user_id=1, workout_id=2),
+            Favorite(user_id=1, workout_id=4),
+            Favorite(user_id=1, workout_id=5),
+            Favorite(user_id=2, workout_id=1),
+            Favorite(user_id=2, workout_id=2),
+            Favorite(user_id=3, workout_id=2),
+
+        ]
+
+        for favorite in favorites:
+            db.session.add(favorite)
         db.session.commit()
 
         revs = [
@@ -92,6 +92,7 @@ if __name__ == '__main__':
             Review(user_id=2, workout_id=1, rating=3, comment="About 400 chars: I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. "),
             Review(user_id=3, workout_id=1, rating=5, comment="I agree with the first reviewer!"),
             Review(user_id=2, workout_id=2, rating=1, comment="Absolute trash"),
+            Review(user_id=3, workout_id=3, rating=1, comment="No good"),
     
         ]
         for review in revs:
