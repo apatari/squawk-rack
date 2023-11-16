@@ -8,7 +8,7 @@ function WorkoutDetail({ user }) {
 
     const { workout_id } = useParams()
     const [workout, setWorkout] = useState(null)
-    const [isFav, setIsFav] = useState(false)
+    
     
 
     useEffect(() => {
@@ -22,29 +22,17 @@ function WorkoutDetail({ user }) {
             )
             
     }, [])
+    
+    let isFav = null
 
-    // Adding or removing this line changes behavior significantly.  One is wrong whenever isFav should
-    // start at true, the other starts off looking good but then the button stays yellow and number only decrements
-    useEffect(determineFavorite, [workout])
-
-    function determineFavorite() {
-        if (workout) {
-            workout.favorites.forEach(favorite => {
-            if (favorite.user_id === user.id) {
-                setIsFav(true)
-            }
-        })
-        }
-       
+    if (workout) {
+        isFav = workout.favorites.some(favorite => {
+                return favorite.user_id === user.id
+            })
     }
+    
 
     const handleFavClick = () => {
-        const curr_count = workout.favorite_count
-        if (isFav) {
-            setWorkout({...workout, "favorite_count": curr_count - 1})
-        } else {
-            setWorkout({...workout, "favorite_count": curr_count + 1})
-        }
         
         fetch('/api/favorites', {
             method: "POST",
@@ -53,7 +41,8 @@ function WorkoutDetail({ user }) {
             },
             body: JSON.stringify({"user_id": user.id, "workout_id": workout.id})
         })
-        .then(setIsFav(!isFav))
+        .then(res => res.json())
+        .then(data => setWorkout(data))
     }
 
     if (workout) {
