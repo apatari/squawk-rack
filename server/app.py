@@ -12,6 +12,17 @@ from config import app, db, api
 from models import User, Workout, Favorite, Exercise
 
 # Views go here!
+def add_exercise_summary_and_favs(workout):
+            summary = ', '.join([exercise['name'] for exercise in workout['exercises']])
+            if len(summary) > 30:
+                summary = summary[:27] + "..."
+            workout["summary"] = summary
+            if len(workout['details']) > 85 :
+                workout['short_details'] = workout['details'][:82] + "..."
+            else:
+                workout['short_details'] = workout['details']
+            workout["favorite_count"] = len(workout["favorites"])
+            return workout
 
 class Signup(Resource):
 
@@ -79,22 +90,7 @@ class CheckSession(Resource):
 
 class WorkoutIndex(Resource):
 
-    
-        
-
     def get(self):
-
-        def add_exercise_summary_and_favs(workout):
-            summary = ', '.join([exercise['name'] for exercise in workout['exercises']])
-            if len(summary) > 30:
-                summary = summary[:27] + "..."
-            workout["summary"] = summary
-            if len(workout['details']) > 85 :
-                workout['short_details'] = workout['details'][:82] + "..."
-            else:
-                workout['short_details'] = workout['details']
-            workout["favorite_count"] = len(workout["favorites"])
-            return workout
 
         workouts = [ add_exercise_summary_and_favs(workout.to_dict()) for workout in Workout.query.all()]
 
@@ -123,8 +119,9 @@ class FavoriteIndex(Resource):
         if fav:
             db.session.delete(fav)
             db.session.commit()
+            workout = Workout.query.filter_by(id=json["workout_id"]).first().to_dict()
 
-            return {}, 204
+            return add_exercise_summary_and_favs(workout), 200
         
         else:
             user = User.query.filter_by(id=json["user_id"]).first()
@@ -133,7 +130,9 @@ class FavoriteIndex(Resource):
             db.session.add(new_favorite)
             db.session.commit()
 
-            return new_favorite.to_dict(), 201
+            workout = Workout.query.filter_by(id=json["workout_id"]).first().to_dict()
+
+            return add_exercise_summary_and_favs(workout), 200
 
 
 

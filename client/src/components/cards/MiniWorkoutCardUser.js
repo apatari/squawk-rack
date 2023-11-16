@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Badge, Row, Col } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 
-function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout }) {
+function MiniWorkoutCardUser({ workout, user, setWorkouts, workouts, onUpdateWorkout }) {
 
     const [isFav, setIsFav] = useState(false)
     const [favCount, setFavCount] = useState(workout.favorite_count)
@@ -61,12 +61,10 @@ function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout
                 
                 <Row className="d-flex mt-auto" >
                     
-                    <Col className="flex-shrink-*" >
+                    <Col className="flex-shrink-*  d-flex justify-content-end" >
                         <Card.Text className="fs-6" >
-                            <Card.Link onClick={handleFavClick} style={{cursor: 'pointer'}}  >
-                                {isFav? 'Unfav': 'Favorite'}
-                            </Card.Link>
-                            <Card.Link onClick={handleReviewClick} style={{cursor: 'pointer'}}  >Review</Card.Link>
+                            
+                            <Card.Link onClick={handleReviewClick} style={{cursor: 'pointer'}} className=""  >Review</Card.Link>
                         </Card.Text>
                     </Col>
 
@@ -82,4 +80,4 @@ function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout
     )
 }
 
-export default WorkoutMiniCard
+export default MiniWorkoutCardUser
