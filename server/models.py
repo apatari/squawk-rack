@@ -18,8 +18,9 @@ class User(db.Model, SerializerMixin):
     favorites = db.relationship('Favorite', back_populates='user')
     favorite_workouts = association_proxy('favorites', 'workout', 
                                           creator=lambda workout_obj: Favorite(workout=workout_obj))
+    reviews = db.relationship('Review', back_populates='user')
 
-    serialize_rules = ('-workouts.user', '-favorite_workouts.user', '-favorites.user', '-_password_hash')
+    serialize_rules = ('-workouts.user', '-favorite_workouts.user', '-favorites.user', '-_password_hash', '-reviews.user')
 
     @validates('username')
     def validate_username(self, key, name):
@@ -64,8 +65,15 @@ class Workout(db.Model, SerializerMixin):
     favorites = db.relationship('Favorite', back_populates='workout')
     favorite_users = association_proxy('favorites', 'user', 
                                           creator=lambda user_obj: Favorite(user=user_obj))
+    reviews = db.relationship('Review', back_populates='workout')
 
-    serialize_rules = ('-exercises.workout', '-user.workouts', '-favorite_users.workouts', '-favorites.workout', '-user.favorites')
+    serialize_rules = ('-exercises.workout', 
+                       '-user.workouts', 
+                       '-favorite_users.workouts', 
+                       '-favorites.workout', 
+                       '-user.favorites',
+                       '-reviews.workout'
+                       )
 
     @validates('name')
     def validate_name(self, key, name):
@@ -137,3 +145,30 @@ class Favorite(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'Favorite {self.id}'
+    
+
+class Review(db.Model, SerializerMixin):
+    __tablename__ = 'reviews'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'))
+    rating = db.Column(db.Integer, nullable=False)
+    comment = db.Column(db.String)
+
+    user = db.relationship('User', back_populates='reviews')
+    workout = db.relationship('Workout', back_populates='reviews')
+
+    serialize_rules = ('-user.reviews', '-workout.reviews')
+
+    @validates('rating')
+    def validate_rating(self, key, num):
+        if not 0<= num <= 5 or not type(num) == int:
+            raise ValueError("Rating must be a number between 0 and 5")
+        return num
+    
+    @validates('comment')
+    def validate_comment(self, key, comm):
+        if len(comm) > 1000:
+            raise ValueError("Comment must be fewer than 1000 characters")
+        return comm

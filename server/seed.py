@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, User, Workout, Exercise, Favorite
+from models import db, User, Workout, Exercise, Favorite, Review
 
 if __name__ == '__main__':
     fake = Faker()
@@ -21,6 +21,7 @@ if __name__ == '__main__':
         Workout.query.delete()
         Exercise.query.delete()
         Favorite.query.delete()
+        Review.query.delete()
 
         print("Adding users...")
 
@@ -83,4 +84,16 @@ if __name__ == '__main__':
         db.session.add(f4)
         db.session.add(f5)
 
+        db.session.commit()
+
+        revs = [
+            Review(user_id=1, workout_id=1, rating=5, comment="Wow, great workout!"),
+            Review(user_id=1, workout_id=2, rating=4, comment="Pretty decent"),
+            Review(user_id=2, workout_id=1, rating=3, comment="About 400 chars: I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. I have a lot to say about this workout. "),
+            Review(user_id=3, workout_id=1, rating=5, comment="I agree with the first reviewer!"),
+            Review(user_id=2, workout_id=2, rating=1, comment="Absolute trash"),
+    
+        ]
+        for review in revs:
+            db.session.add(review)
         db.session.commit()
