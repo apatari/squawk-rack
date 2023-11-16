@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Col } from "react-bootstrap";
 import WorkoutMiniCard from "./WorkoutMiniCard";
 import MiniWorkoutCardUser from "./MiniWorkoutCardUser";
+import PHWorkoutCard from "./PHWorkoutCard";
 
 function MyWorkoutList({ user }) {
 
@@ -31,22 +32,25 @@ function MyWorkoutList({ user }) {
         })
          })
 
-    return (
-        <div className="m-4" >
-            <h3 className="text-primary" >Your Workouts</h3>
-            <Col className="d-flex flex-wrap p-3" >
-                {my_workouts.map(workout => {
-                        return <WorkoutMiniCard key={workout.id} workout={workout} user={user} workouts={workouts} onUpdate onUpdateWorkout={handleUpdateWorkout} />
-                    })}
-            </Col>
-            <h3 className="text-primary" >Favorite Workouts</h3>
-            <Col className="d-flex flex-wrap p-3" >
-                {fav_workouts.map(workout => {
-                        return <MiniWorkoutCardUser key={workout.id} workout={workout} user={user} setWorkouts={setWorkouts} onUpdateWorkout={handleUpdateWorkout}/>
-                    })}
-            </Col>
-        </div>
-    )
+
+        return (
+            <div className="m-4" >
+                
+                <h3 className="text-primary" >Your Work outs</h3>
+                <Col className="d-flex flex-wrap p-3" >
+                    {my_workouts.map(workout => {
+                            return <WorkoutMiniCard key={workout.id} workout={workout} user={user} workouts={workouts} onUpdate onUpdateWorkout={handleUpdateWorkout} />
+                        })}
+                </Col>
+                <h3 className="text-primary" >Favorite Workouts</h3>
+                <Col className="d-flex flex-wrap p-3" >
+                    {fav_workouts.map(workout => {
+                            return <MiniWorkoutCardUser key={workout.id} workout={workout} user={user} setWorkouts={setWorkouts} onUpdateWorkout={handleUpdateWorkout}/>
+                        })}
+                </Col>
+            </div>
+        )
+    
 }
 
 export default MyWorkoutList
