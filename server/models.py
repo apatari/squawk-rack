@@ -20,7 +20,14 @@ class User(db.Model, SerializerMixin):
                                           creator=lambda workout_obj: Favorite(workout=workout_obj))
     reviews = db.relationship('Review', back_populates='user')
 
-    serialize_rules = ('-workouts.user', '-favorite_workouts.user', '-favorites.user', '-_password_hash', '-reviews.user')
+    serialize_rules = ('-workouts.user', 
+                       '-favorite_workouts.user', 
+                       '-favorites.user', 
+                       '-_password_hash', 
+                       '-reviews.user',
+                       '-favorite_workouts.reviews',
+                       
+                       )
 
     @validates('username')
     def validate_username(self, key, name):
@@ -72,7 +79,10 @@ class Workout(db.Model, SerializerMixin):
                        '-favorite_users.workouts', 
                        '-favorites.workout', 
                        '-user.favorites',
-                       '-reviews.workout'
+                       '-reviews.workout',
+                       '-favorite_users.reviews',
+                       '-user.reviews',
+                       
                        )
 
     @validates('name')
@@ -159,7 +169,9 @@ class Review(db.Model, SerializerMixin):
     user = db.relationship('User', back_populates='reviews')
     workout = db.relationship('Workout', back_populates='reviews')
 
-    serialize_rules = ('-user.reviews', '-workout.reviews')
+    serialize_only = ('id', 'user_id', 'workout_id', 'rating', 'comment')
+
+    # serialize_rules = ('-user.reviews', '-workout.reviews', '-user.favorite_workouts', '-workout.favorite_users', '-user.workouts')
 
     @validates('rating')
     def validate_rating(self, key, num):
