@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, session
+from flask import request, session, render_template
 from flask_restful import Resource
 
 # Local imports
@@ -134,6 +134,11 @@ class FavoriteIndex(Resource):
 
             return add_exercise_summary_and_favs(workout), 200
 
+
+@app.route('/')
+@app.route('/<int:id>')
+def index(id=0):
+    return render_template("index.html")
 
 
 api.add_resource(FavoriteIndex, '/api/favorites', endpoint='favorites')
