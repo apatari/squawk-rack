@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, Badge, Row, Col } from 'react-bootstrap'
 import { Link } from "react-router-dom";
+import ReviewBar from "./ReviewBar";
 
 function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout }) {
 
@@ -29,13 +30,12 @@ function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout
         console.log(`Make a review of workout ${workout.id}`)
     }
 
-
+    const reviewAverage = (workout.reviews.reduce((acc, val) => acc + val.rating, 0) / (workout.reviews.length + .000001)).toFixed(1)
 
     return (
         <Card style={{width: '18rem'}} className="m-2 bg-light "  >
-            <Card.Body className="d-flex flex-column" >
+            <Card.Body className="d-flex flex-column" > 
                 
-
                 <Link to= {`/workouts/${workout.id}`} style={{textDecoration: 'none'}} >
                     <Card.Title   className="fw-bold fs-4 text-primary" >{workout.name}</Card.Title>
                 </Link>
@@ -45,7 +45,7 @@ function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout
                 <Card.Text className="text-dark" >
                     {workout.short_details}
                 </Card.Text>
-                
+                {(workout.reviews.length > 0)?<ReviewBar avg={reviewAverage} />:""}
                 <Row className="d-flex mt-auto" >
                     
                     <Col className="flex-shrink-*" >
