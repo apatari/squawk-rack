@@ -59,7 +59,8 @@ function WorkoutDetail({ user }) {
                     <Button className="ms-auto btn btn-outline-light" >Review workout</Button>
                 </div>
                 <div>
-                    <ReviewArea workout={workout} />
+                    {(workout.reviews.length > 0)? <ReviewArea workout={workout} /> : 
+                        <h3 className="mt-5" >This workout has not yet been reviewed</h3>}
                 </div>
                 
             </div>

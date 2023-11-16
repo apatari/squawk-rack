@@ -169,7 +169,7 @@ class Review(db.Model, SerializerMixin):
     user = db.relationship('User', back_populates='reviews')
     workout = db.relationship('Workout', back_populates='reviews')
 
-    serialize_only = ('id', 'user_id', 'workout_id', 'rating', 'comment')
+    serialize_only = ('id', 'user_id', 'workout_id', 'rating', 'comment', 'user.username')
 
     # serialize_rules = ('-user.reviews', '-workout.reviews', '-user.favorite_workouts', '-workout.favorite_users', '-user.workouts')
 

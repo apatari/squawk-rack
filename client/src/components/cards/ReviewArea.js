@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import ReviewBar from "./ReviewBar";
+import ReviewCard from "./ReviewCard";
 
 function ReviewArea({ workout }) {
 
@@ -22,7 +23,11 @@ function ReviewArea({ workout }) {
                 </Col>
 
             </Row>
-            Review cards here
+            <Row className="vstack ms-4">
+                {workout.reviews.map(review => {
+                    return <ReviewCard key={review.id} review={review} />
+                })}
+            </Row>
             
         </div>
     )
