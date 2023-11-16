@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import WorkoutInfoCard from "./cards/WorkoutInfoCard";
 import ExerciseList from "./cards/ExerciseList";
 import { Button } from "react-bootstrap";
+import ReviewArea from "./cards/ReviewArea";
 
 function WorkoutDetail({ user }) {
 
@@ -56,6 +57,9 @@ function WorkoutDetail({ user }) {
                         <Button className="btn btn-outline-warning" onClick={handleFavClick}>Remove from favorites</Button>:
                         <Button className="btn btn-outline-success" onClick={handleFavClick}>Add to favorites</Button>}
                     <Button className="ms-auto btn btn-outline-light" >Review workout</Button>
+                </div>
+                <div>
+                    <ReviewArea workout={workout} />
                 </div>
                 
             </div>

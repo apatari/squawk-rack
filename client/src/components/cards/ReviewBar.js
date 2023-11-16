@@ -1,7 +1,7 @@
 import React from "react";
 import { ProgressBar } from "react-bootstrap";
 
-function ReviewBar({ avg }) {
+function ReviewBar({ avg, ht }) {
     
     let color = "success"
     if (avg <= 1.5) {color = 'danger'}
@@ -9,8 +9,8 @@ function ReviewBar({ avg }) {
     if (3<avg && avg<=4) {color = 'primary'}
 
     return (
-        <div  className="mb-3 text-warning">
-            <ProgressBar   variant={color} now={avg * 20} label={avg} style={{height: '11px'}}/>
+        <div  className=" text-warning my-auto">
+            <ProgressBar   variant={color} now={avg * 20} label={avg} style={{height: ht}}/>
         </div>
         
     )

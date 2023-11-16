@@ -45,7 +45,10 @@ function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout
                 <Card.Text className="text-dark" >
                     {workout.short_details}
                 </Card.Text>
-                {(workout.reviews.length > 0)?<ReviewBar avg={reviewAverage} />:""}
+                <div className="mb-3" >
+                    {(workout.reviews.length > 0)?<ReviewBar avg={reviewAverage} ht='11px' />:""}
+                </div>
+                
                 <Row className="d-flex mt-auto" >
                     
                     <Col className="flex-shrink-*" >
