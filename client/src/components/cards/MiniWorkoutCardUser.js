@@ -7,31 +7,10 @@ function MiniWorkoutCardUser({ workout, user, setWorkouts, workouts, onUpdateWor
     const [isFav, setIsFav] = useState(false)
     const [favCount, setFavCount] = useState(workout.favorite_count)
 
-    const handleFavClick = () => {
-        if (isFav) {
-            setFavCount(current => current - 1)
-        } else {
-            setFavCount(current => current + 1)
-        }
-
-        fetch('/api/favorites', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({"user_id": user.id, "workout_id": workout.id})
-        }).then(r => r.json())
-        .then(data => onUpdateWorkout(data))
-        .then(setIsFav((currentFav) => !currentFav))
-    }
 
     const handleReviewClick = () => {
         console.log(`Make a review of workout ${workout.id}`)
     }
-
-    
-
-    
     
     const renderFavorites = () =>{
         workout.favorites.forEach(favorite => {

@@ -21,7 +21,7 @@ function WorkoutDetail({ user }) {
                 }}
             )
             
-    }, [])
+    }, [workout_id])
     
     let isFav = null
 
@@ -62,9 +62,9 @@ function WorkoutDetail({ user }) {
             
         )
     } else {
-        // optional 'missing' message
+        // optional 'missing/loading' message
         return (
-            <h1 className="m-3" ></h1>
+            <h1 className="m-3" >Loading ... </h1>
         )
     }
     
