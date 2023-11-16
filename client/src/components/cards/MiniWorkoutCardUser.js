@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card, Badge, Row, Col } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 
 function MiniWorkoutCardUser({ workout, user, setWorkouts, workouts, onUpdateWorkout }) {
 
-    const [isFav, setIsFav] = useState(false)
-    const [favCount, setFavCount] = useState(workout.favorite_count)
+ 
+    const favCount = workout.favorite_count
 
 
     const handleReviewClick = () => {
         console.log(`Make a review of workout ${workout.id}`)
     }
     
-    const renderFavorites = () =>{
-        workout.favorites.forEach(favorite => {
-        if (favorite.user_id === user.id) {
-            setIsFav(true)
-        }
-    })
-    }
 
    
-    useEffect(renderFavorites, [])
 
     return (
         <Card style={{width: '18rem'}} className="m-2 bg-light "  >

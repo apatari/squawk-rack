@@ -24,10 +24,10 @@ function MyWorkoutList({ user }) {
         }))
     }
 
-    const my_workouts = workouts.filter(workout => workout.user_id == user.id )
+    const my_workouts = workouts.filter(workout => workout.user_id === user.id )
     const fav_workouts = workouts.filter(workout => {
         return workout.favorites.some(favorite => {
-            return favorite.user_id == user.id
+            return favorite.user_id === user.id
         })
          })
 

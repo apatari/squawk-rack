@@ -29,20 +29,7 @@ function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout
         console.log(`Make a review of workout ${workout.id}`)
     }
 
-    
 
-    
-    
-    const renderFavorites = () =>{
-        workout.favorites.forEach(favorite => {
-        if (favorite.user_id === user.id) {
-            setIsFav(true)
-        }
-    })
-    }
-
-   
-    useEffect(renderFavorites, [])
 
     return (
         <Card style={{width: '18rem'}} className="m-2 bg-light "  >
