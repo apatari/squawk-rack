@@ -45,13 +45,16 @@ function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout
                 <Card.Text className="text-dark" >
                     {workout.short_details}
                 </Card.Text>
-                <div className="mb-3" >
-                    {(workout.reviews.length > 0)?<ReviewBar avg={reviewAverage} ht='11px' />:""}
-                </div>
+                
                 
                 <Row className="d-flex mt-auto" >
                     
                     <Col className="flex-shrink-*" >
+
+                        <div className="mb-3" >
+                            {(workout.reviews.length > 0)?<ReviewBar avg={reviewAverage} ht='11px' />:""}
+                        </div>
+
                         <Card.Text className="fs-6" >
                             <Card.Link onClick={handleFavClick} style={{cursor: 'pointer'}}  >
                                 {isFav? 'Unfav': 'Favorite'}
@@ -61,7 +64,7 @@ function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout
                     </Col>
 
                     <Col style={{alignItems: 'center'}} className="d-flex justify-content-end" >
-                    {(favCount)? <Badge pill bg='primary'>{favCount}</Badge> : ""}
+                        {(favCount)? <Badge pill bg='primary'>{favCount}</Badge> : ""}
                     </Col>
                     
                 </Row>

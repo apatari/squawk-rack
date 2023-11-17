@@ -93,6 +93,7 @@ if __name__ == '__main__':
             Review(user_id=3, workout_id=1, rating=5, comment="I agree with the first reviewer!"),
             Review(user_id=2, workout_id=2, rating=1, comment="Absolute trash"),
             Review(user_id=3, workout_id=3, rating=1, comment="No good"),
+            Review(user_id=3, workout_id=4, rating=4, comment="Decent"),
     
         ]
         for review in revs:

@@ -8,11 +8,11 @@ function ReviewArea({ workout }) {
     const reviewAverage = (workout.reviews.reduce((acc, val) => acc + val.rating, 0) / (workout.reviews.length + .000001)).toFixed(1)
 
     return (
-        <div className="m-2 mt-5" >
-            <h3  >Reviews</h3>
-            <Row className="m-2">
+        <div className=" mt-5" >
+            
+            <Row className=" ">
                 <Col>
-                    <strong className="fs-4" >Average rating: </strong>
+                    <h3  >Average rating: </h3>
                 </Col>
 
                 <Col xs={9} className="d-flex" style={{alignItems:'center'}} >
@@ -23,6 +23,8 @@ function ReviewArea({ workout }) {
                 </Col>
 
             </Row>
+            <h3 className=" mt-4 ms-3 " >Reviews</h3>
+
             <Row className="vstack ms-4">
                 {workout.reviews.map(review => {
                     return <ReviewCard key={review.id} review={review} />
