@@ -8,8 +8,8 @@ function ReviewForm({ user, workout}) {
 
     const [rating, setRating] = useState(1)
 
-    function handleRatingChange(num) {
-        setRating(num)
+    function handleRatingChange(e) {
+        setRating(e.target.value)
     }
 
 
@@ -37,11 +37,13 @@ function ReviewForm({ user, workout}) {
                                 <Form.Check
                                     
                                     inline
+                                    value={num}
                                     label={num}
                                     name="group1"
                                     type='radio'
                                     id={`inline-radio-${num}`}
-                                    checked={rating === num}
+                                    checked={rating == num}
+                                    onChange={handleRatingChange}
                                     
                                 />
                                 )
