@@ -1,23 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import UserViewWorkoutCard from "../cards/UserViewWorkoutCard";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import ReviewBar from "../cards/ReviewBar";
 
 function ReviewForm({ user, workout}) {
+
+
+    const [rating, setRating] = useState(1)
+
+    function handleRatingChange(num) {
+        setRating(num)
+    }
+
+
     return (
         <div>
-            <Col lg="4" className="mx-auto">
-                <h3 className="mt-5">
+            <Col lg="5" className="mx-auto">
+                <h3 className="mt-5 mb-3 ">
                     Reviewing:
                 </h3>
-                <UserViewWorkoutCard workout={workout} isReview={true} />    
-                <Form className="m-4"  >
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Example textarea</Form.Label>
-                    <Form.Control as="textarea" rows={3} />
-                </Form.Group>
-                    <Button className="m-3" variant="primary" type="submit">
+                <UserViewWorkoutCard workout={workout} isReview={true} />
+
+                <Form className="mt-5"  >
+
+                    <Form.Group>
+                        <ReviewBar avg={rating} ht='16px' />
+                        <Row  className="my-3">
+                            <Col  >
+                            Rating:
+                            </Col>
+                         
+                        <Col xs={8}>
+
+                            {[0,1,2,3,4,5].map((num) => {
+                                return (
+                                <Form.Check
+                                    
+                                    inline
+                                    label={num}
+                                    name="group1"
+                                    type='radio'
+                                    id={`inline-radio-${num}`}
+                                    checked={rating === num}
+                                    
+                                />
+                                )
+                            })
+                            }
+                            </Col>
+                        </Row> 
+
+
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Leave a comment</Form.Label>
+                        <Form.Control as="textarea" rows={4} placeholder="Comment" />
+                    </Form.Group>
+
+                    <Button className="my-3" variant="primary" type="submit">
                         Submit
                     </Button>
+
                 </Form>
                 
                 
