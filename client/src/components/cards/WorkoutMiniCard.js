@@ -48,12 +48,12 @@ function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout
                 
                 
                 <Row className="d-flex mt-auto" >
+
+                    <div className="mb-3" >
+                        {(workout.reviews.length > 0)?<ReviewBar avg={reviewAverage} ht='11px' />:""}
+                    </div>
                     
                     <Col className="flex-shrink-*" >
-
-                        <div className="mb-3" >
-                            {(workout.reviews.length > 0)?<ReviewBar avg={reviewAverage} ht='11px' />:""}
-                        </div>
 
                         <Card.Text className="fs-6" >
                             <Card.Link onClick={handleFavClick} style={{cursor: 'pointer'}}  >

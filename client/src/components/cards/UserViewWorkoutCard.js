@@ -1,8 +1,9 @@
 import React from "react";
 import { Card, Badge, Row, Col } from 'react-bootstrap'
 import { Link } from "react-router-dom";
+import ReviewBar from "./ReviewBar";
 
-function MiniWorkoutCardUser({ workout, user, setWorkouts, workouts, onUpdateWorkout }) {
+function UserViewWorkoutCard({ workout, user, setWorkouts, workouts, onUpdateWorkout }) {
 
  
     const favCount = workout.favorite_count
@@ -12,7 +13,7 @@ function MiniWorkoutCardUser({ workout, user, setWorkouts, workouts, onUpdateWor
         console.log(`Make a review of workout ${workout.id}`)
     }
     
-
+    const reviewAverage = (workout.reviews.reduce((acc, val) => acc + val.rating, 0) / (workout.reviews.length + .000001)).toFixed(1)
    
 
     return (
@@ -31,8 +32,13 @@ function MiniWorkoutCardUser({ workout, user, setWorkouts, workouts, onUpdateWor
                 </Card.Text>
                 
                 <Row className="d-flex mt-auto" >
+
+                    <div className="mb-3" >
+                            {(workout.reviews.length > 0)?<ReviewBar avg={reviewAverage} ht='11px' />:""}
+                    </div>
+
+                    <Col className="flex-shrink-* d-flex justify-content-end " >
                     
-                    <Col className="flex-shrink-*  d-flex justify-content-end" >
                         <Card.Text className="fs-6" >
                             
                             <Card.Link onClick={handleReviewClick} style={{cursor: 'pointer'}} className=""  >Review</Card.Link>
@@ -51,4 +57,4 @@ function MiniWorkoutCardUser({ workout, user, setWorkouts, workouts, onUpdateWor
     )
 }
 
-export default MiniWorkoutCardUser
+export default UserViewWorkoutCard
