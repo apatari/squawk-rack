@@ -39,7 +39,14 @@ function MyWorkoutList({ user }) {
             <h3 className="text-primary" >Your Workouts</h3>
             <Col className="d-flex flex-wrap p-3" >
                 {my_workouts.map(workout => {
-                        return <UserViewWorkoutCard key={workout.id} workout={workout} isReview={false} />
+                        return <WorkoutMiniCard 
+                            key={workout.id} 
+                            workout={workout} 
+                            workouts={workouts} 
+                            user={user} 
+                            setWorkouts={setWorkouts} 
+                            onUpdateWorkout={handleUpdateWorkout} 
+                        />
                     })}
             </Col>
             <h3 className="text-primary" >Favorite Workouts</h3>
