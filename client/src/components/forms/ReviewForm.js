@@ -1,16 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import UserViewWorkoutCard from "../cards/UserViewWorkoutCard";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import ReviewBar from "../cards/ReviewBar";
+import { useFormik } from "formik";
+import * as yup from "yup"
 
 function ReviewForm({ user, workout}) {
 
+    const history = useHistory()
 
-    const [rating, setRating] = useState(0)
+    const formSchema = yup.object().shape({
+        comment: yup.string().max(1000),
+        rating: yup 
+          .number()
+          .integer()
+          .required("Must enter a rating")
+          .typeError("Please enter an Integer")
+          .max(5)
+          .min(0)
+      });
+    
+      const formik = useFormik({
+        initialValues: {
+          comment: "",
+          rating: 0,
+        },
+        validationSchema: formSchema,
+        onSubmit: (values) => { 
 
-    function handleRatingChange(e) {
-        setRating(e.target.value)
-    }
+          fetch("/api/reviews", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({...values, "user_id":user.id, "workout_id": workout.id, rating: parseInt(values.rating)}),
+          }).then((res) => {
+            if (res.status == 201) {
+                history.push(`/workouts/${workout.id}`);
+            }
+          });
+        },
+      });
 
 
     return (
@@ -21,10 +52,10 @@ function ReviewForm({ user, workout}) {
                 </h3>
                 <UserViewWorkoutCard workout={workout} isReview={true} />
 
-                <Form className="mt-5"  >
+                <Form className="mt-5" onSubmit={formik.handleSubmit} >
 
                     <Form.Group>
-                        <ReviewBar avg={rating} ht='16px' />
+                        <ReviewBar avg={formik.values.rating} ht='16px' />
                         <Row  className="my-3">
                             <Col  >
                             <strong>Rating:</strong> 
@@ -39,11 +70,11 @@ function ReviewForm({ user, workout}) {
                                     inline
                                     value={num}
                                     label={num}
-                                    name="group1"
+                                    name="rating"
                                     type='radio'
                                     id={`inline-radio-${num}`}
-                                    checked={rating == num}
-                                    onChange={handleRatingChange}
+                                    checked={formik.values.rating == num}
+                                    onChange={formik.handleChange}
                                     
                                 />
                                 )
@@ -55,9 +86,17 @@ function ReviewForm({ user, workout}) {
 
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Group className="mb-3" >
                         <Form.Label>Leave a comment</Form.Label>
-                        <Form.Control as="textarea" rows={4} placeholder="Comment" />
+                        <Form.Control 
+                            as="textarea" 
+                            rows={4} 
+                            placeholder="Comment" 
+                            value={formik.values.comment} 
+                            onChange={formik.handleChange}
+                            id="comment"
+                            name="comment"
+                        />
                     </Form.Group>
 
                     <Button className="my-3" variant="primary" type="submit">
