@@ -34,7 +34,7 @@ function NewReview({ user }) {
 
         )
     } else {
-        return (<h1>Loading...</h1>)
+        return (<h1 className="m-4" >Loading...</h1>)
     }
 
 }

@@ -56,7 +56,7 @@ function WorkoutDetail({ user }) {
                     {isFav?
                         <Button className="btn btn-outline-warning" onClick={handleFavClick}>Remove from favorites</Button>:
                         <Button className="btn btn-outline-success" onClick={handleFavClick}>Add to favorites</Button>}
-                    <Button className="ms-auto btn btn-outline-light" >Review workout</Button>
+                    <a role='button' href={`/reviewfor/${workout.id}`} className="ms-auto btn btn-outline-light" >Review workout</a>
                 </div>
                 <div>
                     {(workout.reviews.length > 0)? <ReviewArea workout={workout} /> : 

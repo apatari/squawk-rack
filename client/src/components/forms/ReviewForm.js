@@ -6,7 +6,7 @@ import ReviewBar from "../cards/ReviewBar";
 function ReviewForm({ user, workout}) {
 
 
-    const [rating, setRating] = useState(1)
+    const [rating, setRating] = useState(0)
 
     function handleRatingChange(e) {
         setRating(e.target.value)
@@ -27,7 +27,7 @@ function ReviewForm({ user, workout}) {
                         <ReviewBar avg={rating} ht='16px' />
                         <Row  className="my-3">
                             <Col  >
-                            Rating:
+                            <strong>Rating:</strong> 
                             </Col>
                          
                         <Col xs={8}>
