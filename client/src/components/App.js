@@ -8,6 +8,7 @@ import Explore from "./Explore";
 import Create from "./Create";
 import Login from "./Login";
 import WorkoutDetail from "./WorkoutDetail";
+import NewReview from "./NewReview";
 
 function App() {
 
@@ -46,8 +47,13 @@ function App() {
         <Route exact path="/create">
           <Create/>
         </Route>
+
         <Route path ='/workouts/:workout_id' >
           <WorkoutDetail user={user} />
+        </Route>
+
+        <Route path ='/reviewfor/:workout_id' >
+          <NewReview user={user} />
         </Route>
       </Switch>
     </div>

@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import ReviewBar from "./ReviewBar";
 
 function UserViewWorkoutCard({ workout, user, setWorkouts, workouts, onUpdateWorkout }) {
-
+// Add a prop to show when this card is used as part of the create review page
+//  that will let you conditionally render things like the review button and the bar
  
     const favCount = workout.favorite_count
 

@@ -23,7 +23,7 @@ function ReviewArea({ workout }) {
                 </Col>
 
             </Row>
-            <h3 className=" mt-4 ms-3 " >Reviews</h3>
+            <h3 className=" mt-4 ms-3 " >Reviews ({workout.reviews.length})</h3>
 
             <Row className="vstack ms-4">
                 {workout.reviews.map(review => {

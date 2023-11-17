@@ -59,7 +59,7 @@ function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout
                             <Card.Link onClick={handleFavClick} style={{cursor: 'pointer'}}  >
                                 {isFav? 'Unfav': 'Favorite'}
                             </Card.Link>
-                            <Card.Link onClick={handleReviewClick} style={{cursor: 'pointer'}}  >Review</Card.Link>
+                            <Card.Link href={`/reviewfor/${workout.id}`} style={{cursor: 'pointer'}}  >Review</Card.Link>
                         </Card.Text>
                     </Col>
 
