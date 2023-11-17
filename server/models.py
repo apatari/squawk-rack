@@ -19,6 +19,8 @@ class User(db.Model, SerializerMixin):
     favorite_workouts = association_proxy('favorites', 'workout', 
                                           creator=lambda workout_obj: Favorite(workout=workout_obj))
     reviews = db.relationship('Review', back_populates='user')
+    reviewed_workouts = association_proxy('reviews', 'workout',
+                                          creator=lambda workout_obj: Review(workout=workout_obj) )
 
     serialize_rules = ('-workouts.user', 
                        '-favorite_workouts.user', 
@@ -73,6 +75,8 @@ class Workout(db.Model, SerializerMixin):
     favorite_users = association_proxy('favorites', 'user', 
                                           creator=lambda user_obj: Favorite(user=user_obj))
     reviews = db.relationship('Review', back_populates='workout')
+    reviewed_users = association_proxy('reviews', 'user', 
+                                       creator=lambda user_obj: Review(user=user_obj))
 
     serialize_rules = ('-exercises.workout', 
                        '-user.workouts', 
