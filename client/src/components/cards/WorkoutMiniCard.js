@@ -5,7 +5,11 @@ import ReviewBar from "./ReviewBar";
 
 function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout }) {
 
-    const [isFav, setIsFav] = useState(false)
+    const [isFav, setIsFav] = useState(workout.favorites.some(
+            favorite => {
+                return favorite.user_id === user.id
+            }
+        ))
     const [favCount, setFavCount] = useState(workout.favorite_count)
 
     const handleFavClick = () => {

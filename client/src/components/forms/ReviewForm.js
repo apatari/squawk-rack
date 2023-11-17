@@ -35,7 +35,7 @@ function ReviewForm({ user, workout}) {
                             {[0,1,2,3,4,5].map((num) => {
                                 return (
                                 <Form.Check
-                                    
+                                    key={num}
                                     inline
                                     value={num}
                                     label={num}
