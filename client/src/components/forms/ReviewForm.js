@@ -1,43 +1,25 @@
 import React from "react";
 import UserViewWorkoutCard from "../cards/UserViewWorkoutCard";
+import { Form, Button, Row, Col } from "react-bootstrap";
 
-function ReviewForm() {
+function ReviewForm({ user, workout}) {
     return (
         <div>
             <Col lg="4" className="mx-auto">
-                <h3 className="m-5">
+                <h3 className="mt-5">
                     Reviewing:
-                </h3>    
-                <Form className="m-4"onSubmit={handleSubmit} >
-                    <Form.Group className="m-3" controlId="formBasicUsername">
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control 
-                            type="username" 
-                            placeholder="Enter username"
-                            value={username}
-                            onChange={e => setUsername(e.target.value)}  
-                        />
-                    </Form.Group>
-                
-                    <Form.Group className="m-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control 
-                            type="password" 
-                            placeholder="Password"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)} 
-                        />
-                    </Form.Group>
-                    {errors.map((err) => (
-                        <p className="text-danger m-3" key={err}>{err}</p>
-                    ))}
+                </h3>
+                <UserViewWorkoutCard workout={workout} isReview={true} />    
+                <Form className="m-4"  >
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Example textarea</Form.Label>
+                    <Form.Control as="textarea" rows={3} />
+                </Form.Group>
                     <Button className="m-3" variant="primary" type="submit">
-                        Log In
+                        Submit
                     </Button>
                 </Form>
-                <Row>
-                    <Button className="m-3 text-primary w-45" onClick={handleSignupClick} >Click here to create an account</Button>
-                </Row>
+                
                 
             </Col>
         </div>

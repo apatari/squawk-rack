@@ -3,7 +3,7 @@ import { Card, Badge, Row, Col } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import ReviewBar from "./ReviewBar";
 
-function UserViewWorkoutCard({ workout, user, setWorkouts, workouts, onUpdateWorkout }) {
+function UserViewWorkoutCard({ workout, isReview }) {
 // Add a prop to show when this card is used as part of the create review page
 //  that will let you conditionally render things like the review button and the bar
  
@@ -31,7 +31,7 @@ function UserViewWorkoutCard({ workout, user, setWorkouts, workouts, onUpdateWor
                 <Card.Text className="text-dark" >
                     {workout.short_details}
                 </Card.Text>
-                
+                {isReview? "":
                 <Row className="d-flex mt-auto" >
 
                     <div className="mb-3" >
@@ -50,7 +50,7 @@ function UserViewWorkoutCard({ workout, user, setWorkouts, workouts, onUpdateWor
                     {(favCount)? <Badge pill bg='primary'>{favCount}</Badge> : ""}
                     </Col>
                     
-                </Row>
+                </Row>}
                 
                 
             </Card.Body>

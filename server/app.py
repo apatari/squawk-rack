@@ -103,7 +103,7 @@ class WorkoutByID(Resource):
 
         if workout:
             workout.exercises.sort(key=lambda exercise: exercise.order_number)
-            workout = workout.to_dict()
+            workout = add_exercise_summary_and_favs(workout.to_dict())
             workout["favorite_count"] = len(workout["favorites"])
             return workout, 200
         else:

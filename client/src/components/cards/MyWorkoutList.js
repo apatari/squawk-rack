@@ -39,13 +39,13 @@ function MyWorkoutList({ user }) {
             <h3 className="text-primary" >Your Workouts</h3>
             <Col className="d-flex flex-wrap p-3" >
                 {my_workouts.map(workout => {
-                        return <UserViewWorkoutCard key={workout.id} workout={workout} user={user} workouts={workouts} onUpdate onUpdateWorkout={handleUpdateWorkout} />
+                        return <UserViewWorkoutCard key={workout.id} workout={workout} isReview={false} />
                     })}
             </Col>
             <h3 className="text-primary" >Favorite Workouts</h3>
             <Col className="d-flex flex-wrap p-3" >
                 {fav_workouts.map(workout => {
-                        return <UserViewWorkoutCard key={workout.id} workout={workout} user={user} setWorkouts={setWorkouts} onUpdateWorkout={handleUpdateWorkout}/>
+                        return <UserViewWorkoutCard key={workout.id} workout={workout} isReview={false}/>
                     })}
             </Col>
         </div>
