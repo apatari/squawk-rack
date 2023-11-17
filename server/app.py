@@ -135,12 +135,32 @@ class FavoriteIndex(Resource):
             return add_exercise_summary_and_favs(workout), 200
 
 
+class ReviewIndex(Resource):
+
+    def post(self):
+        json = request.get_json()
+
+        try:
+            new_review = Review(user_id=json['user_id'],
+                                workout_id=json['workout_id'],
+                                rating=json['rating'],
+                                comment=json['comment'])
+            db.session.add(new_review)
+            db.session.commit()
+
+            return new_review.to_dict(), 201
+        except Exception as err:
+            return {"errors": [str(err)]}, 422
+
+
+
+
 @app.route('/')
 @app.route('/<int:id>')
 def index(id=0):
     return render_template("index.html")
 
-
+api.add_resource(ReviewIndex, '/api/reviews', endpoint='reviews')
 api.add_resource(FavoriteIndex, '/api/favorites', endpoint='favorites')
 api.add_resource(WorkoutByID, '/api/workouts/<int:id>', endpoint='workout_by_id')
 api.add_resource(WorkoutIndex, '/api/workouts', endpoint='workouts')
