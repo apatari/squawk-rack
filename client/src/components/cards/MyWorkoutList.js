@@ -49,7 +49,7 @@ function MyWorkoutList({ user }) {
                         />
                     })}
             </Col>
-            <h3 className="text-primary" >Favorite Workouts</h3>
+            <h3 className="text-primary mt-3 mb-1" >Favorite Workouts</h3>
             <Col className="d-flex flex-wrap p-3" >
                 {fav_workouts.map(workout => {
                         return <UserViewWorkoutCard key={workout.id} workout={workout} isReview={false}/>

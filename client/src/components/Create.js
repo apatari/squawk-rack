@@ -1,10 +1,17 @@
 import React from "react";
+import WorkoutForm from "./forms/WorkoutForm";
 
-function Create(){
+
+function Create( { user }){
     return (
-        <h1>
-            Create
-        </h1>
+        <div>
+            <h2 className="m-4" >
+                Create your new workout
+            </h2>
+            <WorkoutForm />
+            
+        </div>
+        
     )
 }
 

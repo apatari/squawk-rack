@@ -45,7 +45,7 @@ function App() {
         </Route>
 
         <Route exact path="/create">
-          <Create/>
+          <Create user={user} />
         </Route>
 
         <Route path ='/workouts/:workout_id' >

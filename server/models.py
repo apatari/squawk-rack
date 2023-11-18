@@ -99,8 +99,8 @@ class Workout(db.Model, SerializerMixin):
     
     @validates('details')
     def validate_details(self, key, details):
-        if len(details) > 1000:
-            raise ValueError("Must be 1000 characters or fewer")
+        if  len(details) > 1000 or len(details) < 1:
+            raise ValueError("Must be 1 - 1000 characters")
         return details
 
     def __repr__(self):
