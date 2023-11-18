@@ -95,6 +95,24 @@ class WorkoutIndex(Resource):
         workouts = [ add_exercise_summary_and_favs(workout.to_dict()) for workout in Workout.query.all()]
 
         return workouts, 200
+    
+    def post(self):
+
+        json = request.get_json()
+
+        try:
+            new_workout = Workout(
+                                    name=json['name'],
+                                    details=json['details'],
+                                    user_id=json['user_id']
+                                    )
+            db.session.add(new_workout)
+            db.session.commit()
+
+            return new_workout.to_dict(), 201
+        
+        except Exception as err:
+            return {"errors": [str(err)]}, 422
 
 class WorkoutByID(Resource):
 
@@ -180,6 +198,7 @@ class ExerciseIndex(Resource):
 @app.route('/<int:id>')
 def index(id=0):
     return render_template("index.html")
+
 
 api.add_resource(ExerciseIndex, '/api/exercises', endpoint='exercises')
 api.add_resource(ReviewIndex, '/api/reviews', endpoint='reviews')
