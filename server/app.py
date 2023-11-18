@@ -176,19 +176,23 @@ class ExerciseIndex(Resource):
     def post(self):
 
         json = request.get_json()
+        exercises = json['exercises']
+        result=[]
 
         try:
-            new_exercise = Exercise(
-                                    name=json['name'],
-                                    sets=json['sets'],
-                                    reps=json['reps'],
-                                    order_number=json['order_number'],
-                                    workout_id=json['workout_id'],
-                                    )
-            db.session.add(new_exercise)
+            for exercise in exercises:
+                new_exercise = Exercise(
+                                        name=exercise['name'],
+                                        sets=exercise['sets'],
+                                        reps=exercise['reps'],
+                                        order_number=exercise['order_number'],
+                                        workout_id=exercise['workout_id'],
+                                        )
+                db.session.add(new_exercise)
+                result.append(new_exercise.to_dict())
             db.session.commit()
 
-            return new_exercise.to_dict(), 201
+            return result, 201
         
         except Exception as err:
             return {"errors": [str(err)]}, 422
