@@ -11,7 +11,7 @@ function ReviewForm({ user, workout}) {
     const history = useHistory()
 
     const formSchema = yup.object().shape({
-        comment: yup.string().max(1000),
+        comment: yup.string().max(1000, "Must be fewer than 1000 characters"),
         rating: yup 
           .number()
           .integer()
@@ -87,7 +87,7 @@ function ReviewForm({ user, workout}) {
                     </Form.Group>
 
                     <Form.Group className="mb-3" >
-                        <Form.Label>Leave a comment</Form.Label>
+                        <Form.Label>Leave a comment (optional)</Form.Label>
                         <Form.Control 
                             as="textarea" 
                             rows={4} 
@@ -98,7 +98,7 @@ function ReviewForm({ user, workout}) {
                             name="comment"
                         />
                     </Form.Group>
-
+                    <p style={{ color: "red" }}> {formik.errors.comment}</p>
                     <Button className="my-3" variant="primary" type="submit">
                         Submit
                     </Button>
