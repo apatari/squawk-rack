@@ -50,7 +50,7 @@ function WorkoutDetail({ user }) {
         return (
             <div className="m-4 p-2" >
                 <WorkoutInfoCard workout={workout} />
-                <ExerciseList exercises = {workout.exercises} />
+                <ExerciseList exercises = {workout.exercises} editMode={false} />
                 <div className="w-50 d-flex m-3" >
                     
                     {isFav?
