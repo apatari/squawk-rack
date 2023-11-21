@@ -15,6 +15,8 @@ function ExerciseList({ exercises, editMode, setExercises }) {
                             editMode={editMode} 
                             index={index} 
                             last={exercises.length - 1}
+                            setExercises={setExercises}
+                            exercises={exercises}
                         />
             })}
         </div>
