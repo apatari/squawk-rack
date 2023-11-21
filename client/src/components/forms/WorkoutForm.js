@@ -86,7 +86,7 @@ function WorkoutForm({ user }) {
 
                 </Form>
 
-                <ExerciseList exercises={exercises} editMode={true}/>
+                <ExerciseList exercises={exercises} editMode={true} setExercises={setExercises}/>
 
                 <ExerciseForm user={user} exercises={exercises} setExercises={setExercises} />
 

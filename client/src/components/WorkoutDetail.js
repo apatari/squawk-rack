@@ -9,6 +9,7 @@ function WorkoutDetail({ user }) {
 
     const { workout_id } = useParams()
     const [workout, setWorkout] = useState(null)
+    const [exercises, setExercises] = useState([])
     
     
 
@@ -17,8 +18,9 @@ function WorkoutDetail({ user }) {
         .then(
             res => {if (res.ok) 
                 {res.json()
-                    .then(data => setWorkout(data))
-                    
+                    .then(data => {
+                        setWorkout(data)
+                        setExercises(data.exercises)})   
                 }}
             )
             
@@ -43,14 +45,17 @@ function WorkoutDetail({ user }) {
             body: JSON.stringify({"user_id": user.id, "workout_id": workout.id})
         })
         .then(res => res.json())
-        .then(data => setWorkout(data))
+        .then(data => {
+            setWorkout(data)
+            })
+        
     }
 
     if (workout) {
         return (
             <div className="m-4 p-2" >
                 <WorkoutInfoCard workout={workout} />
-                <ExerciseList exercises = {workout.exercises} editMode={false} />
+                <ExerciseList exercises = {exercises} editMode={false} setExercises={setExercises} />
                 <div className="w-50 d-flex m-3" >
                     
                     {isFav?
