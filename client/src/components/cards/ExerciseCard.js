@@ -13,6 +13,10 @@ function ExerciseCard({ exercise, editMode, index, last, setExercises, exercises
         setExercises([...exercises])
     }
 
+    const handleDeleteClick = () => {
+        setExercises(exercises.filter(item => item.order_number != exercise.order_number))
+    }
+
     return (
         <div>
             <Row className="my-2" >
@@ -24,7 +28,7 @@ function ExerciseCard({ exercise, editMode, index, last, setExercises, exercises
                        
                     {(editMode)? 
                     <div className="d-flex" >
-                        <Button className="btn btn-warning" >Delete</Button>
+                        <Button className="btn btn-warning" onClick={handleDeleteClick} >Delete</Button>
                         {(index === 0)? 
                             <Button className="mx-2 btn btn-secondary disabled" disabled >&#x2191;</Button> 
                             : <Button className="mx-2 btn btn-primary" onClick={handleUpClick} >&#x2191;</Button> }
