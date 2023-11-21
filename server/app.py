@@ -99,6 +99,7 @@ class WorkoutIndex(Resource):
     def post(self):
 
         json = request.get_json()
+        exercises = json['exercises']
 
         try:
             new_workout = Workout(
@@ -109,8 +110,25 @@ class WorkoutIndex(Resource):
             db.session.add(new_workout)
             db.session.commit()
 
-            return new_workout.to_dict(), 201
+            try:
+                for exercise in exercises:
+                    new_exercise = Exercise(
+                                            name=exercise['name'],
+                                            sets=exercise['sets'],
+                                            reps=exercise['reps'],
+                                            order_number=exercise['order_number'],
+                                            workout_id=new_workout.id,
+                                            )
+                    db.session.add(new_exercise)
+                    db.session.commit()
+                    
+
+                return new_workout.to_dict(), 201
         
+            except Exception as err:
+
+                return {"errors": [str(err)]}, 422
+
         except Exception as err:
             return {"errors": [str(err)]}, 422
 
@@ -126,6 +144,21 @@ class WorkoutByID(Resource):
             return workout, 200
         else:
             return {"error": "workout not found"}, 404
+        
+    def post(self):
+
+        json = request.get_json()
+        
+
+        try:
+            new_workout = Workout(user_id=json['user_id'], name=json['name'], details=json['details'])
+            
+            db.session.add(new_workout)
+            db.session.commit()
+        except Exception as err:
+            return {"errors": [str(err)]}, 422
+
+        
 
 class FavoriteIndex(Resource):
 
@@ -171,31 +204,31 @@ class ReviewIndex(Resource):
         except Exception as err:
             return {"errors": [str(err)]}, 422
 
-class ExerciseIndex(Resource):
+# class ExerciseIndex(Resource):
 
-    def post(self):
+#     def post(self):
 
-        json = request.get_json()
-        exercises = json['exercises']
-        result=[]
+#         json = request.get_json()
+#         exercises = json['exercises']
+#         result=[]
 
-        try:
-            for exercise in exercises:
-                new_exercise = Exercise(
-                                        name=exercise['name'],
-                                        sets=exercise['sets'],
-                                        reps=exercise['reps'],
-                                        order_number=exercise['order_number'],
-                                        workout_id=exercise['workout_id'],
-                                        )
-                db.session.add(new_exercise)
-                db.session.commit()
-                result.append(new_exercise.to_dict())
+        # try:
+        #     for exercise in exercises:
+        #         new_exercise = Exercise(
+        #                                 name=exercise['name'],
+        #                                 sets=exercise['sets'],
+        #                                 reps=exercise['reps'],
+        #                                 order_number=exercise['order_number'],
+        #                                 workout_id=exercise['workout_id'],
+        #                                 )
+        #         db.session.add(new_exercise)
+        #         db.session.commit()
+        #         result.append(new_exercise.to_dict())
 
-            return result, 201
+        #     return result, 201
         
-        except Exception as err:
-            return {"errors": [str(err)]}, 422
+        # except Exception as err:
+        #     return {"errors": [str(err)]}, 422
 
 
 @app.route('/')
@@ -204,7 +237,7 @@ def index(id=0):
     return render_template("index.html")
 
 
-api.add_resource(ExerciseIndex, '/api/exercises', endpoint='exercises')
+# api.add_resource(ExerciseIndex, '/api/exercises', endpoint='exercises')
 api.add_resource(ReviewIndex, '/api/reviews', endpoint='reviews')
 api.add_resource(FavoriteIndex, '/api/favorites', endpoint='favorites')
 api.add_resource(WorkoutByID, '/api/workouts/<int:id>', endpoint='workout_by_id')
