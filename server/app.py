@@ -189,8 +189,8 @@ class ExerciseIndex(Resource):
                                         workout_id=exercise['workout_id'],
                                         )
                 db.session.add(new_exercise)
+                db.session.commit()
                 result.append(new_exercise.to_dict())
-            db.session.commit()
 
             return result, 201
         

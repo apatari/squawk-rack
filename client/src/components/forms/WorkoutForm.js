@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import ExerciseForm from "./ExerciseForm";
+import ExerciseList from "../cards/ExerciseList";
 
 
-function WorkoutForm() {
+function WorkoutForm({ user }) {
+
+    const [exercises, setExercises] = useState([])
+
     return (
         <div>
             <Col lg="6" className="mx-auto">
-                {/* <h3 className="mt-5 mb-3 ">
-                    Reviewing:
-                </h3> */}
                 
                      
                 <Form className="mt-5"  >
@@ -38,13 +39,16 @@ function WorkoutForm() {
                     </Form.Group>
                     {/* <p style={{ color: "red" }}> {formik.errors.comment}</p> */}
 
-                    <ExerciseForm/>
-
                     <Button className="my-3" variant="primary" type="submit">
                         Submit
                     </Button>
 
                 </Form>
+
+                <ExerciseList exercises={exercises}/>
+
+                <ExerciseForm user={user} exercises={exercises} setExercises={setExercises} />
+
                 
                 
             </Col>

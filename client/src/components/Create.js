@@ -8,7 +8,7 @@ function Create( { user }){
             <h2 className="m-4" >
                 Create your new workout
             </h2>
-            <WorkoutForm />
+            <WorkoutForm user={user} />
             
         </div>
         
