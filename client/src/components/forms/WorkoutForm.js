@@ -57,10 +57,11 @@ function WorkoutForm({ user }) {
                         <Form.Group className="mb-4 " >
                             <Form.Label className="fs-4" >Workout Name</Form.Label>
                             <Form.Control 
-                                type="username" 
+                                id="name" 
+                                name="name" 
                                 placeholder="Name"
-                                // value={username}
-                                // onChange={e => setUsername(e.target.value)}  
+                                value={formik.values.name}
+                                onChange={formik.handleChange}  
                             />
                         </Form.Group>
                     </Col>
@@ -70,13 +71,14 @@ function WorkoutForm({ user }) {
                             as="textarea" 
                             rows={4} 
                             placeholder="Rest intervals, superset suggestions, and general advice" 
-                            // value={formik.values.comment} 
-                            // onChange={formik.handleChange}
+                            value={formik.values.details} 
+                            onChange={formik.handleChange}
                             id="details"
                             name="details"
                         />
                     </Form.Group>
-                    {/* <p style={{ color: "red" }}> {formik.errors.comment}</p> */}
+                    <p style={{ color: "red" }}> {formik.errors.name}</p>
+                    <p style={{ color: "red" }}> {formik.errors.details}</p>
 
                     <Button className="my-3" variant="primary" type="submit">
                         Submit
