@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import ExerciseForm from "./ExerciseForm";
 import ExerciseList from "../cards/ExerciseList";
 import { useFormik } from "formik"
 import * as yup from "yup"
 
 
-function WorkoutForm({ user }) {
+function EditWorkout({ user }) {
 
     const history = useHistory()
+    const { workout_id } = useParams()
+
+    const empty_workout = {
+        "name": "",
+        "details": "",
+        "user_id": 0,
+        "exercises": []
+    }
 
     const [exercises, setExercises] = useState([])
+    const [workout, setWorkout] = useState(empty_workout)
+    
 
     const formSchema = yup.object().shape({
         name: yup.string()
@@ -23,14 +34,28 @@ function WorkoutForm({ user }) {
         
     })
 
+    useEffect(() => {
+        fetch(`/api/workouts/${workout_id}`)
+        .then(
+            res => {if (res.ok) 
+                {res.json()
+                    .then(data => {
+                        setWorkout(data)
+                        setExercises(data.exercises)})   
+                }}
+            )
+            
+    }, [workout_id])
+
     const formik = useFormik({
         initialValues: {
-            name: "",
-            details: ""
+            name: workout.name,
+            details: workout.details
         },
         validationSchema: formSchema,
+        enableReinitialize: true,
         onSubmit: (values) => { 
-
+            // change to a PATCH
             fetch("/api/workouts", {
               method: "POST",
               headers: {
@@ -47,8 +72,12 @@ function WorkoutForm({ user }) {
           }
     })
 
+
     return (
         <div>
+            <h2 className="m-4" >
+                Edit your workout
+            </h2>
             <Col lg="6" className="mx-auto">
                 
                      
@@ -98,4 +127,4 @@ function WorkoutForm({ user }) {
     )
 }
 
-export default WorkoutForm
+export default EditWorkout

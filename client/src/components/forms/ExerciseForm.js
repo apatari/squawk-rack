@@ -10,7 +10,7 @@ function ExerciseForm({ user, exercises, setExercises }) {
     const formSchema = yup.object().shape({
         name: yup.string()
             .required("Must name each exercise")
-            .max(20, "Name must be 20 characters or fewer"),
+            .max(30, "Name must be 30 characters or fewer"),
         sets:  yup.number("Sets must be a number")
             .positive("Sets cannot be negative or zero")
             .integer()

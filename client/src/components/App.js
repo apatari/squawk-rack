@@ -9,6 +9,7 @@ import Create from "./Create";
 import Login from "./Login";
 import WorkoutDetail from "./WorkoutDetail";
 import NewReview from "./NewReview";
+import EditWorkout from "./forms/EditWorkout";
 
 function App() {
 
@@ -48,8 +49,12 @@ function App() {
           <Create user={user} />
         </Route>
 
-        <Route path ='/workouts/:workout_id' >
+        <Route exact path ='/workouts/:workout_id' >
           <WorkoutDetail user={user} />
+        </Route>
+
+        <Route exact path ='/workouts/edit/:workout_id' >
+          <EditWorkout user={user} />
         </Route>
 
         <Route path ='/reviewfor/:workout_id' >

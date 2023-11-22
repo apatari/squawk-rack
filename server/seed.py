@@ -59,10 +59,16 @@ if __name__ == '__main__':
             Exercise(name="Lunges", sets=3, reps=12, order_number=3, workout_id=2),
             Exercise(name="Good Mornings", sets=3, reps=10, order_number=4, workout_id=2),
             Exercise(name="Box Jumps", sets=3, reps=10, order_number=5, workout_id=2),
-            Exercise(name="placeholder", sets=3, reps=10, order_number=1, workout_id=3),
-            Exercise(name="placeholder", sets=3, reps=10, order_number=2, workout_id=3),
-            Exercise(name="placeholder", sets=3, reps=10, order_number=3, workout_id=3),
-            Exercise(name="placeholder", sets=3, reps=10, order_number=4, workout_id=3),
+            Exercise(name="Back Squat", sets=3, reps=10, order_number=1, workout_id=3),
+            Exercise(name="Front Squat", sets=3, reps=10, order_number=2, workout_id=3),
+            Exercise(name="Bulgarian Split Squat", sets=3, reps=10, order_number=3, workout_id=3),
+            Exercise(name="Goblet Squat", sets=3, reps=10, order_number=4, workout_id=3),
+            Exercise(name="Sled Push", sets=3, reps=10, order_number=1, workout_id=4),
+            Exercise(name="Sled Pull", sets=3, reps=10, order_number=2, workout_id=4),
+            Exercise(name="Farmer Carry", sets=4, reps=15, order_number=3, workout_id=4),
+            Exercise(name="Lat Pulldown", sets=3, reps=10, order_number=1, workout_id=5),
+            Exercise(name="Meadows Row", sets=4, reps=15, order_number=2, workout_id=5),
+            Exercise(name="EZ Bar Curl", sets=4, reps=12, order_number=3, workout_id=5),
             
 
         ]
