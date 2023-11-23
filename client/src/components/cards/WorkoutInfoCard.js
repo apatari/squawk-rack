@@ -1,7 +1,12 @@
 import React from "react";
 import { Row, Col, Badge, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 
 function WorkoutInfoCard({ workout, user }) {
+
+    const history = useHistory()
+
     return (
         <div>
             <Row>
@@ -45,7 +50,12 @@ function WorkoutInfoCard({ workout, user }) {
                         <h3 className="text-primary" >This is your workout</h3>
                     </Col>
                     <Col>
-                        <Button className="btn btn-outline-warning" >Edit Workout</Button>
+                        <Button 
+                            className="btn btn-outline-warning"
+                            onClick={() => { history.push(`/workouts/${workout.id}/edit`) }} 
+                        >
+                            Edit Workout
+                        </Button>
                     </Col>
                     <Col>
                         <Button className="btn btn-outline-danger" >Delete this workout</Button>

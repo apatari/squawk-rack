@@ -53,7 +53,7 @@ function App() {
           <WorkoutDetail user={user} />
         </Route>
 
-        <Route exact path ='/workouts/edit/:workout_id' >
+        <Route exact path ='/workouts/:workout_id/edit' >
           <EditWorkout user={user} />
         </Route>
 
