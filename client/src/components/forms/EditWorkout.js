@@ -41,7 +41,7 @@ function EditWorkout({ user }) {
                 {res.json()
                     .then(data => {
                         setWorkout(data)
-                        setExercises(data.exercises)})   
+                        setExercises(data.exercises.sort((a,b) => {return a.order_number - b.order_number}))})   
                 }}
             )
             

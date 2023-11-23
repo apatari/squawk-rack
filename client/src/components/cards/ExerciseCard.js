@@ -5,6 +5,7 @@ function ExerciseCard({ exercise, editMode, index, last, setExercises, exercises
 
     const handleUpClick = () => {
         [exercises[index], exercises[index - 1]] = [exercises[index - 1], exercises[index]]
+        [exercises[index], exercises[index - 1]] = [exercises[index - 1], exercises[index]]
         setExercises([...exercises])
     }
 
