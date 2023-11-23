@@ -5,7 +5,11 @@ import * as yup from "yup"
 
 function ExerciseForm({ user, exercises, setExercises }) {
 
-    const [orderNumber, setOrderNumber] = useState(1)
+    const orderMax = Math.max(...exercises.map(exercise => exercise.order_number)) + 1 
+    const nums = exercises.map(ex => ex.order_number)
+
+
+    const [orderNumber, setOrderNumber] = useState(Math.max.apply(0, nums))
 
     const formSchema = yup.object().shape({
         name: yup.string()
@@ -29,8 +33,10 @@ function ExerciseForm({ user, exercises, setExercises }) {
             reps: 0,
         },
         validationSchema: formSchema,
+        validateOnChange: false,
+        validateOnBlur: false,
         onSubmit: (values,  { resetForm }) => {
-            setExercises((current) => [...current, {...values, "order_number": orderNumber, "sets": parseInt(values.sets), "reps": parseInt(values.reps)}])
+            setExercises((current) => [...current, {...values, "sets": parseInt(values.sets), "reps": parseInt(values.reps)}])
             // console.log(JSON.stringify({...values, "order_number": orderNumber, "sets": parseInt(values.sets), "reps": parseInt(values.reps)}))
             setOrderNumber(orderNumber + 1)
             resetForm()

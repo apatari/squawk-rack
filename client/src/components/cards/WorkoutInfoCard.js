@@ -1,7 +1,7 @@
 import React from "react";
-import { Row, Col, Badge } from "react-bootstrap";
+import { Row, Col, Badge, Button } from "react-bootstrap";
 
-function WorkoutInfoCard({ workout }) {
+function WorkoutInfoCard({ workout, user }) {
     return (
         <div>
             <Row>
@@ -38,6 +38,21 @@ function WorkoutInfoCard({ workout }) {
                 {Boolean(workout.updated_at)? <Col>Updated <strong>{workout.updated_at}</strong></Col> : ""}
                 
             </Row>
+            
+            {(workout.user_id === user.id)?
+                <Row className="my-3" lg={4} >
+                    <Col>
+                        <h3 className="text-primary" >This is your workout</h3>
+                    </Col>
+                    <Col>
+                        <Button className="btn btn-outline-warning" >Edit Workout</Button>
+                    </Col>
+                    <Col>
+                        <Button className="btn btn-outline-danger" >Delete this workout</Button>
+                    </Col>
+                </Row> :
+                ""
+            }
 
             
             

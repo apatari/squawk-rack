@@ -29,6 +29,8 @@ function WorkoutForm({ user }) {
             details: ""
         },
         validationSchema: formSchema,
+        validateOnChange: false,
+        validateOnBlur: false,
         onSubmit: (values) => { 
 
             fetch("/api/workouts", {

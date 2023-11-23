@@ -111,12 +111,12 @@ class WorkoutIndex(Resource):
             db.session.commit()
 
             try:
-                for exercise in exercises:
+                for index, exercise in enumerate(exercises):
                     new_exercise = Exercise(
                                             name=exercise['name'],
                                             sets=exercise['sets'],
                                             reps=exercise['reps'],
-                                            order_number=exercise['order_number'],
+                                            order_number=index,
                                             workout_id=new_workout.id,
                                             )
                     db.session.add(new_exercise)
@@ -157,6 +157,49 @@ class WorkoutByID(Resource):
             db.session.commit()
         except Exception as err:
             return {"errors": [str(err)]}, 422
+        
+    def patch(self, id):
+        
+        json = request.get_json()
+
+        workout = Workout.query.filter_by(id=id).first()
+
+        if not workout:
+            return {"error": "Workout not found"}, 404
+        else:
+            try:
+                workout.name=json['name']
+                workout.details=json['details']
+                                        
+                db.session.add(workout)
+                db.session.commit()
+
+                # delete all the workout's exercises
+                for exercise in Exercise.query.filter_by(workout_id=workout.id).all():
+                    db.session.delete(exercise)
+                    db.session.commit()
+
+                try:
+                    for index,exercise in enumerate(json['exercises']):
+                        new_exercise = Exercise(
+                                                name=exercise['name'],
+                                                sets=exercise['sets'],
+                                                reps=exercise['reps'],
+                                                order_number=index + 1,
+                                                workout_id=workout.id,
+                                                )
+                        db.session.add(new_exercise)
+                        db.session.commit()
+                        
+
+                    return workout.to_dict(), 201
+            
+                except Exception as err:
+
+                    return {"errors": [str(err)]}, 422
+
+            except Exception as err:
+                return {"errors": [str(err)]}, 422
 
         
 
@@ -203,32 +246,6 @@ class ReviewIndex(Resource):
         
         except Exception as err:
             return {"errors": [str(err)]}, 422
-
-# class ExerciseIndex(Resource):
-
-#     def post(self):
-
-#         json = request.get_json()
-#         exercises = json['exercises']
-#         result=[]
-
-        # try:
-        #     for exercise in exercises:
-        #         new_exercise = Exercise(
-        #                                 name=exercise['name'],
-        #                                 sets=exercise['sets'],
-        #                                 reps=exercise['reps'],
-        #                                 order_number=exercise['order_number'],
-        #                                 workout_id=exercise['workout_id'],
-        #                                 )
-        #         db.session.add(new_exercise)
-        #         db.session.commit()
-        #         result.append(new_exercise.to_dict())
-
-        #     return result, 201
-        
-        # except Exception as err:
-        #     return {"errors": [str(err)]}, 422
 
 
 @app.route('/')

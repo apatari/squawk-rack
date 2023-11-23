@@ -53,11 +53,13 @@ function EditWorkout({ user }) {
             details: workout.details
         },
         validationSchema: formSchema,
+        validateOnChange: false,
+        validateOnBlur: false,
         enableReinitialize: true,
         onSubmit: (values) => { 
-            // change to a PATCH
-            fetch("/api/workouts", {
-              method: "POST",
+            
+            fetch(`/api/workouts/${workout.id}`, {
+              method: "PATCH",
               headers: {
                 "Content-Type": "application/json",
               },

@@ -10,7 +10,7 @@ function ExerciseList({ exercises, editMode, setExercises }) {
             {(exercises.length > 0)? <h3>Exercises</h3> : <h3>Add exercises to your workout</h3>}
             {sortedExercises.map((exercise, index) => {
                 return <ExerciseCard  
-                            key={exercise.order_number} 
+                            key={index} 
                             exercise={exercise} 
                             editMode={editMode} 
                             index={index} 

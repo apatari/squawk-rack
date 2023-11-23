@@ -4,17 +4,17 @@ import { Button, Row, Col } from "react-bootstrap";
 function ExerciseCard({ exercise, editMode, index, last, setExercises, exercises }) {
 
     const handleUpClick = () => {
-        [exercises[index].order_number, exercises[index - 1].order_number] = [exercises[index - 1].order_number, exercises[index].order_number]
+        [exercises[index], exercises[index - 1]] = [exercises[index - 1], exercises[index]]
         setExercises([...exercises])
     }
 
     const handleDownClick = () => {
-        [exercises[index].order_number, exercises[index + 1].order_number] = [exercises[index + 1].order_number, exercises[index].order_number]
+        [exercises[index], exercises[index + 1]] = [exercises[index + 1], exercises[index]]
         setExercises([...exercises])
     }
 
     const handleDeleteClick = () => {
-        setExercises(exercises.filter(item => item.order_number != exercise.order_number))
+        setExercises(exercises.filter(item => {if (item.name === exercise.name && item.sets === exercise.sets && item.reps === exercise.reps) {return false} else {return true}}))
     }
 
     return (

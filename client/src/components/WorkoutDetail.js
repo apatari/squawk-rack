@@ -54,7 +54,7 @@ function WorkoutDetail({ user }) {
     if (workout) {
         return (
             <div className="m-4 p-2" >
-                <WorkoutInfoCard workout={workout} />
+                <WorkoutInfoCard workout={workout} user={user} />
                 <ExerciseList exercises = {exercises} editMode={false} setExercises={setExercises} />
                 <div className="w-50 d-flex m-3" >
                     
