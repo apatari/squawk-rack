@@ -201,7 +201,17 @@ class WorkoutByID(Resource):
             except Exception as err:
                 return {"errors": [str(err)]}, 422
 
-        
+    def delete(self, id):
+
+        workout = Workout.query.filter_by(id=id).first()
+
+        if workout:
+            db.session.delete(workout)
+            db.session.commit()
+
+            return {}, 204
+        else:
+            return {"error": "Workout not found"}, 404
 
 class FavoriteIndex(Resource):
 

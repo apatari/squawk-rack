@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import WorkoutInfoCard from "./cards/WorkoutInfoCard";
 import ExerciseList from "./cards/ExerciseList";
-import { Button } from "react-bootstrap";
+import { Button} from "react-bootstrap";
+
 import ReviewArea from "./cards/ReviewArea";
 
 function WorkoutDetail({ user }) {
@@ -10,7 +11,6 @@ function WorkoutDetail({ user }) {
     const { workout_id } = useParams()
     const [workout, setWorkout] = useState(null)
     const [exercises, setExercises] = useState([])
-    
     
 
     useEffect(() => {
@@ -67,6 +67,8 @@ function WorkoutDetail({ user }) {
                     {(workout.reviews.length > 0)? <ReviewArea workout={workout} /> : 
                         <h3 className="mt-5" >This workout has not yet been reviewed</h3>}
                 </div>
+
+                
                 
             </div>
             

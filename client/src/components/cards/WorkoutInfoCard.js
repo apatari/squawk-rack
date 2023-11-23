@@ -1,11 +1,16 @@
-import React from "react";
-import { Row, Col, Badge, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Row, Col, Badge, Button, Modal } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 function WorkoutInfoCard({ workout, user }) {
 
     const history = useHistory()
+
+    const [showModal, setShowModal] = useState(false)
+    
+    const handleShow = () => setShowModal(true)
+    const handleClose = () => setShowModal(false)
 
     return (
         <div>
@@ -58,13 +63,26 @@ function WorkoutInfoCard({ workout, user }) {
                         </Button>
                     </Col>
                     <Col>
-                        <Button className="btn btn-outline-danger" >Delete this workout</Button>
+                        <Button className="btn btn-outline-danger" onClick={handleShow} >Delete this workout</Button>
                     </Col>
                 </Row> :
                 ""
             }
 
-            
+                <Modal show={showModal} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Confirm Delete Workout</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>This will delete the workout along with its exercises and any reviews</Modal.Body>
+                    <Modal.Footer>
+                    <Button className="btn btn-outline-primary me-auto" onClick={handleClose}>
+                        Cancel
+                    </Button>
+                    <Button className="btn btn-outline-danger" onClick={handleClose}>
+                        Delete it all
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
             
         </div>
     )
