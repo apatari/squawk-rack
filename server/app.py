@@ -100,6 +100,7 @@ class WorkoutIndex(Resource):
 
         json = request.get_json()
         exercises = json['exercises']
+        print(json)
 
         try:
             new_workout = Workout(
@@ -116,7 +117,7 @@ class WorkoutIndex(Resource):
                                             name=exercise['name'],
                                             sets=exercise['sets'],
                                             reps=exercise['reps'],
-                                            order_number=index,
+                                            order_number=index + 1,
                                             workout_id=new_workout.id,
                                             )
                     db.session.add(new_exercise)

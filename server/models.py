@@ -63,7 +63,7 @@ class Workout(db.Model, SerializerMixin):
     __tablename__ = 'workouts'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True, nullable=False)
+    name = db.Column(db.String, nullable=False)
     details = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
@@ -135,7 +135,7 @@ class Exercise(db.Model, SerializerMixin):
 
     @validates('order_number')
     def validate_order(self, key, num):
-        if not 0 < num < 21:
+        if not 0 <= num < 21:
             raise ValueError("Must be a number from 1 to 20")
         if not type(num) == int:
             raise ValueError("Must be an integer")

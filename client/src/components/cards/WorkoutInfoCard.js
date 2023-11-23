@@ -11,6 +11,21 @@ function WorkoutInfoCard({ workout, user }) {
     
     const handleShow = () => setShowModal(true)
     const handleClose = () => setShowModal(false)
+    
+    const handleDelete = () => {
+        fetch(`/api/workouts/${workout.id}`, {
+            method: "DELETE"
+        })
+        .then(r => {
+            if (r.ok) {
+                alert("Delete successful")
+                history.push('/')
+            } else {
+                alert("Error: delete unsuccessful")
+                handleClose()
+            }
+        })
+    }
 
     return (
         <div>
@@ -78,7 +93,7 @@ function WorkoutInfoCard({ workout, user }) {
                     <Button className="btn btn-outline-primary me-auto" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button className="btn btn-outline-danger" onClick={handleClose}>
+                    <Button className="btn btn-outline-danger" onClick={handleDelete}>
                         Delete it all
                     </Button>
                     </Modal.Footer>
