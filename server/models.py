@@ -70,11 +70,11 @@ class Workout(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     user = db.relationship('User', back_populates='workouts')
-    exercises = db.relationship('Exercise', back_populates='workout')
-    favorites = db.relationship('Favorite', back_populates='workout')
+    exercises = db.relationship('Exercise', back_populates='workout', cascade='all')
+    favorites = db.relationship('Favorite', back_populates='workout', cascade='all')
     favorite_users = association_proxy('favorites', 'user', 
                                           creator=lambda user_obj: Favorite(user=user_obj))
-    reviews = db.relationship('Review', back_populates='workout')
+    reviews = db.relationship('Review', back_populates='workout', cascade='all')
     reviewed_users = association_proxy('reviews', 'user', 
                                        creator=lambda user_obj: Review(user=user_obj))
 
