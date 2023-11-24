@@ -18,7 +18,7 @@ function WorkoutInfoCard({ workout, user }) {
         })
         .then(r => {
             if (r.ok) {
-                alert("Delete successful")
+                
                 history.push('/')
             } else {
                 alert("Error: delete unsuccessful")
