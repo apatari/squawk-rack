@@ -71,7 +71,7 @@ function WorkoutInfoCard({ workout, user }) {
                     </Col>
                     <Col>
                         <Button 
-                            className="btn btn-outline-warning"
+                            className="btn btn-outline-info"
                             onClick={() => { history.push(`/workouts/${workout.id}/edit`) }} 
                         >
                             Edit Workout
@@ -84,11 +84,11 @@ function WorkoutInfoCard({ workout, user }) {
                 ""
             }
 
-                <Modal show={showModal} onHide={handleClose}>
+                <Modal centered  show={showModal} onHide={handleClose}>
                     <Modal.Header closeButton>
                     <Modal.Title>Confirm Delete Workout</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>This will delete the workout along with its exercises and any reviews</Modal.Body>
+                    <Modal.Body className="text-dark fs-5" >This will delete the workout along with its exercises and any reviews</Modal.Body>
                     <Modal.Footer>
                     <Button className="btn btn-outline-primary me-auto" onClick={handleClose}>
                         Cancel

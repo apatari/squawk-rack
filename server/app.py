@@ -100,7 +100,6 @@ class WorkoutIndex(Resource):
 
         json = request.get_json()
         exercises = json['exercises']
-        print(json)
 
         try:
             new_workout = Workout(

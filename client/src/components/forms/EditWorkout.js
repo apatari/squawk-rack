@@ -74,59 +74,66 @@ function EditWorkout({ user }) {
           }
     })
 
-
-    return (
-        <div>
-            <h2 className="m-4" >
-                Edit your workout
-            </h2>
-            <Col lg="6" className="mx-auto">
-                
-                     
-                <Form className="mt-5" onSubmit={formik.handleSubmit} >
-                    <Col md="7">
-                        <Form.Group className="mb-4 " >
-                            <Form.Label className="fs-4" >Workout Name</Form.Label>
+    if (user.id === workout.user_id) {
+        return (
+            <div>
+                <h2 className="m-4" >
+                    Edit your workout
+                </h2>
+                <Col lg="6" className="mx-auto">
+                    
+                        
+                    <Form className="mt-5" onSubmit={formik.handleSubmit} >
+                        <Col md="7">
+                            <Form.Group className="mb-4 " >
+                                <Form.Label className="fs-4" >Workout Name</Form.Label>
+                                <Form.Control 
+                                    id="name" 
+                                    name="name" 
+                                    placeholder="Name"
+                                    value={formik.values.name}
+                                    onChange={formik.handleChange}  
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Form.Group className="mb-3" >
+                            <Form.Label>Details / description</Form.Label>
                             <Form.Control 
-                                id="name" 
-                                name="name" 
-                                placeholder="Name"
-                                value={formik.values.name}
-                                onChange={formik.handleChange}  
+                                as="textarea" 
+                                rows={4} 
+                                placeholder="Rest intervals, superset suggestions, and general advice" 
+                                value={formik.values.details} 
+                                onChange={formik.handleChange}
+                                id="details"
+                                name="details"
                             />
                         </Form.Group>
-                    </Col>
-                    <Form.Group className="mb-3" >
-                        <Form.Label>Details / description</Form.Label>
-                        <Form.Control 
-                            as="textarea" 
-                            rows={4} 
-                            placeholder="Rest intervals, superset suggestions, and general advice" 
-                            value={formik.values.details} 
-                            onChange={formik.handleChange}
-                            id="details"
-                            name="details"
-                        />
-                    </Form.Group>
-                    <p style={{ color: "red" }}> {formik.errors.name}</p>
-                    <p style={{ color: "red" }}> {formik.errors.details}</p>
-                    {(exercises.length > 0)
-                    ? <Button className="my-3 btn btn-outline-success "  type="submit">
-                        Submit
-                    </Button>
-                    : <Button className="btn btn-secondary disabled" disabled >Submit</Button>}
+                        <p style={{ color: "red" }}> {formik.errors.name}</p>
+                        <p style={{ color: "red" }}> {formik.errors.details}</p>
+                        {(exercises.length > 0)
+                        ? <Button className="my-3 btn btn-outline-success "  type="submit">
+                            Submit
+                        </Button>
+                        : <Button className="btn btn-secondary disabled" disabled >Submit</Button>}
 
-                </Form>
+                    </Form>
 
-                <ExerciseList exercises={exercises} editMode={true} setExercises={setExercises}/>
+                    <ExerciseList exercises={exercises} editMode={true} setExercises={setExercises}/>
 
-                <ExerciseForm user={user} exercises={exercises} setExercises={setExercises} />
+                    <ExerciseForm user={user} exercises={exercises} setExercises={setExercises} />
 
-                
-                
-            </Col>
-        </div>
-    )
+                    
+                    
+                </Col>
+            </div>
+        )
+    } else {
+        return (
+            <div className="m-3" >
+                <h3>Sorry, you're not the owner of this workout so you're unable to edit it.</h3>
+            </div>
+        )
+    }
 }
 
 export default EditWorkout
