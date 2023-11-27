@@ -57,7 +57,7 @@ function App() {
           <EditWorkout user={user} />
         </Route>
 
-        <Route path ='/reviewfor/:workout_id' >
+        <Route exact path ='/reviewfor/:workout_id' >
           <NewReview user={user} />
         </Route>
       </Switch>
