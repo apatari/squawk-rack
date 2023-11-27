@@ -36,7 +36,7 @@ function ReviewForm({ user, workout}) {
             },
             body: JSON.stringify({...values, "user_id":user.id, "workout_id": workout.id, rating: parseInt(values.rating)}),
           }).then((res) => {
-            if (res.status == 201) {
+            if (res.status === 201) {
                 history.push(`/workouts/${workout.id}`);
             }
           });
@@ -73,7 +73,7 @@ function ReviewForm({ user, workout}) {
                                     name="rating"
                                     type='radio'
                                     id={`inline-radio-${num}`}
-                                    checked={formik.values.rating == num}
+                                    checked={formik.values.rating === num}
                                     onChange={formik.handleChange}
                                     
                                 />

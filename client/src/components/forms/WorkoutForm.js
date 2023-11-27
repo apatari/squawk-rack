@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import ExerciseForm from "./ExerciseForm";
 import ExerciseList from "../cards/ExerciseList";
@@ -40,7 +40,7 @@ function WorkoutForm({ user }) {
               },
               body: JSON.stringify({...values, "user_id":user.id, "exercises": exercises}),
             }).then((res) => {
-              if (res.status == 201) {
+              if (res.status === 201) {
                     return res.json()
                     .then(workout => {history.push(`/workouts/${workout.id}`)})
                   ;
