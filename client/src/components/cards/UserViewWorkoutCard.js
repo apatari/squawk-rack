@@ -37,7 +37,11 @@ function UserViewWorkoutCard({ workout, isReview }) {
                     
                         <Card.Text className="fs-6" >
                             
-                            <Card.Link href={`/reviewfor/${workout.id}`} style={{cursor: 'pointer'}} className=""  >Review</Card.Link>
+                            <Card.Link  >
+                                <Link to= {`/reviewfor/${workout.id}`} style={{textDecoration: 'none'}} >
+                                    Review
+                                </Link>   
+                            </Card.Link>
                         </Card.Text>
                     </Col>
 
