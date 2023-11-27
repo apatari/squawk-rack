@@ -30,10 +30,6 @@ function WorkoutMiniCard({ workout, user, setWorkouts, workouts, onUpdateWorkout
         .then(setIsFav((currentFav) => !currentFav))
     }
 
-    const handleReviewClick = () => {
-        console.log(`Make a review of workout ${workout.id}`)
-    }
-
     const reviewAverage = (workout.reviews.reduce((acc, val) => acc + val.rating, 0) / (workout.reviews.length + .000001)).toFixed(1)
 
     return (

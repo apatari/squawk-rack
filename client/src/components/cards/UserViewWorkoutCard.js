@@ -9,11 +9,6 @@ function UserViewWorkoutCard({ workout, isReview }) {
  
     const favCount = workout.favorite_count
 
-
-    const handleReviewClick = () => {
-        console.log(`Make a review of workout ${workout.id}`)
-    }
-    
     const reviewAverage = (workout.reviews.reduce((acc, val) => acc + val.rating, 0) / (workout.reviews.length + .000001)).toFixed(1)
    
 

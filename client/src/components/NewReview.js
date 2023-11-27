@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import UserViewWorkoutCard from "./cards/UserViewWorkoutCard";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+
 import ReviewForm from "./forms/ReviewForm";
 
 
