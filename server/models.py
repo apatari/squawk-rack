@@ -33,7 +33,7 @@ class User(db.Model, SerializerMixin):
 
     @validates('username')
     def validate_username(self, key, name):
-        if not name or not 0 < len(name) < 20:
+        if not name or not 0 < len(name) <= 20:
             raise ValueError("Name must be 1-20 characters")
         if name in [user.username for user in User.query.all()]:
             raise ValueError("Sorry, that username is not available")
