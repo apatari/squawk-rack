@@ -23,6 +23,7 @@ function LoginForm({ onLogin, setSignupMode, signupMode }){
         validateOnChange: false,
         validateOnBlur: false,
         onSubmit: (values) => {
+            setErrors([])
             fetch("/api/login", {
                 method: "POST",
                 headers: {
@@ -82,8 +83,8 @@ function LoginForm({ onLogin, setSignupMode, signupMode }){
                         <p className="text-danger m-3" key={err}>{err}</p>
                     ))}
 
-                    <p style={{ color: "red" }}> {formik.errors.username}</p>
-                    <p style={{ color: "red" }}> {formik.errors.password}</p>
+                    <p className="text-danger m-3"> {formik.errors.username}</p>
+                    <p className="text-danger m-3"> {formik.errors.password}</p>
 
                     <Button className="m-3" variant="primary" type="submit">
                         Log In
