@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import WorkoutInfoCard from "./cards/WorkoutInfoCard";
 import ExerciseList from "./cards/ExerciseList";
 import { Button} from "react-bootstrap";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 
 import ReviewArea from "./cards/ReviewArea";
 
@@ -12,6 +14,7 @@ function WorkoutDetail({ user }) {
     const [workout, setWorkout] = useState(null)
     const [exercises, setExercises] = useState([])
     
+    const history = useHistory()
 
     useEffect(() => {
         fetch(`/api/workouts/${workout_id}`)
@@ -61,7 +64,12 @@ function WorkoutDetail({ user }) {
                     {isFav?
                         <Button className="btn btn-outline-warning" onClick={handleFavClick}>Remove from favorites</Button>:
                         <Button className="btn btn-outline-success" onClick={handleFavClick}>Add to favorites</Button>}
-                    <a role='button' href={`/reviewfor/${workout.id}`} className="ms-auto btn btn-outline-light" >Review workout</a>
+                    <Button 
+                        className="ms-auto btn btn-outline-light" 
+                        onClick={() => { history.push(`/reviewfor/${workout.id}`) }}
+                    >
+                        Review workout
+                    </Button>
                 </div>
                 <div>
                     {(workout.reviews.length > 0)? <ReviewArea workout={workout} /> : 

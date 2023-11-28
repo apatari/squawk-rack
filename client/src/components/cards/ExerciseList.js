@@ -1,9 +1,11 @@
 import React from "react";
 import ExerciseCard from "./ExerciseCard";
 
+
 function ExerciseList({ exercises, editMode, setExercises }) {
 
     // const sortedExercises = exercises.sort((a,b) => {return a.order_number - b.order_number})
+    
 
     return (
         <div className="my-4" >
