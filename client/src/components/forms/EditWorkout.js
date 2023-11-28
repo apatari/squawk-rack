@@ -130,7 +130,7 @@ function EditWorkout({ user }) {
     } else {
         return (
             <div className="m-3" >
-                <h3>Sorry, you're not the owner of this workout so you're unable to edit it.</h3>
+                <h3>Loading...</h3>
             </div>
         )
     }

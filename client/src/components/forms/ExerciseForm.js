@@ -15,7 +15,7 @@ function ExerciseForm({ user, exercises, setExercises }) {
             .integer()
             .required("Must enter number of sets").max(20, "Max sets: 20"),
         reps:  yup.number("Reps must be a number")
-            .positive("Reps cannot be positive or zero")
+            .positive("Reps cannot be negative or zero")
             .integer()
             .required("Must enter number of reps").max(100, "Max reps: 100")
         
