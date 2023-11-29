@@ -49,4 +49,4 @@ Start by creating a username and password.  From there you can browse the catalo
 
 ## Acknowledgment
 
-This project was built with [Create React App](https://github.com/facebook/create-react-app) and [SQLAlchemy](https://www.sqlalchemy.org/) and uses [Bootstrap React](https://react-bootstrap.netlify.app/) and [Bootswatch](https://bootswatch.com/) for styling.  Thank you to the folks who created and maintain those resources.
+This project was built with [Create React App](https://github.com/facebook/create-react-app) and [SQLAlchemy](https://www.sqlalchemy.org/) and uses [Bootstrap React](https://react-bootstrap.netlify.app/) and [Bootswatch](https://bootswatch.com/) for styling.  Deployed on [Render](https://render.com/).  Thank you to the folks who created and maintain those resources.
