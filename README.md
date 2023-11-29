@@ -43,7 +43,7 @@ You should see a working version of Squawk Rack runnin on your machine!
 
 ## Usage
 
-TODO: new gif for this app![](https://github.com/apatari/phase-2-Project-disc-bag/blob/main/BagGif.gif)
+![Squawk](https://github.com/apatari/squawk-rack/assets/108021977/e9f66eb2-2aec-4594-99f5-18096d297265)
 
 Start by creating a username and password.  From there you can browse the catalog of existing workouts, create your own, then favorite and review whichever workouts you choose.  All of these actions are persisted in the database.  If things ever get too messy in the database you can always re-seed to start again.  Note that this will erase all user data including usernames and passwords with the exception of the seeded users.
 
