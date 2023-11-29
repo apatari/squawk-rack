@@ -14,7 +14,7 @@ pipenv shell
 
 From there, cd into the server directory and find the config.py file.  Look for the following lines of code, somewhere around line 26:
 
-TODO: add code image
+![Config lines](https://github.com/apatari/squawk-rack/assets/108021977/0ee909b7-a2af-484e-ae00-d80e7b63a902)
 
 Uncomment the commented line that specifies 'sqlite:///app.db' as teh database and comment out the one that looks in the OS environment for it.  This will allow you to work with a local db rather than wherever you choose to host your Postgresql db in the event that you deploy.
 
