@@ -16,7 +16,7 @@ From there, cd into the server directory and find the config.py file.  Look for 
 
 ![Config lines](https://github.com/apatari/squawk-rack/assets/108021977/0ee909b7-a2af-484e-ae00-d80e7b63a902)
 
-Uncomment the commented line that specifies 'sqlite:///app.db' as teh database and comment out the one that looks in the OS environment for it.  This will allow you to work with a local db rather than wherever you choose to host your Postgresql db in the event that you deploy.
+Uncomment the commented line that specifies 'sqlite:///app.db' as the database and comment out the one that looks in the OS environment for it.  This will allow you to work with a local db rather than wherever you choose to host your Postgresql db in the event that you deploy.
 
 Stay in the server directory and run:
 
@@ -39,7 +39,7 @@ From there, open a new terminal in the main directory and run:
 ```bash
 npm install --prefix client
 ```
-You should see a working version of Squawk Rack runnin on your machine!
+You should see a working version of Squawk Rack running on your machine!
 
 ## Usage
 
