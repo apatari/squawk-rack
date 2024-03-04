@@ -10,13 +10,13 @@ function ExerciseForm({ user, exercises, setExercises }) {
         name: yup.string()
             .required("Must name each exercise")
             .max(30, "Name must be 30 characters or fewer"),
-        sets:  yup.number("Sets must be a number")
+        sets:  yup.number().typeError("Sets must be a number")
             .positive("Sets cannot be negative or zero")
-            .integer()
+            .integer("Sets must be an integer")
             .required("Must enter number of sets").max(20, "Max sets: 20"),
-        reps:  yup.number("Reps must be a number")
+        reps:  yup.number().typeError("Reps must be a number")
             .positive("Reps cannot be negative or zero")
-            .integer()
+            .integer('Reps must be an integer')
             .required("Must enter number of reps").max(100, "Max reps: 100")
         
     })  

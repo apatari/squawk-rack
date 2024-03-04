@@ -11,6 +11,7 @@ from config import app, db, api
 # Add your model imports
 from models import User, Workout, Favorite, Exercise, Review
 
+
 # Views go here!
 def add_exercise_summary_and_favs(workout):
             summary = ', '.join([exercise['name'] for exercise in workout['exercises']])
@@ -257,14 +258,13 @@ class ReviewIndex(Resource):
         except Exception as err:
             return {"errors": [str(err)]}, 422
 
+class MapInfo(Resource):
+    def get(self):
+        resp = {"origin": "Brattleboro, VT", "destination":"Keene, NH"}
+        return resp, 200
 
-@app.route('/')
-@app.route('/<int:id>')
-def index(id=0):
-    return render_template("index.html")
+api.add_resource(MapInfo, '/api/map')
 
-
-# api.add_resource(ExerciseIndex, '/api/exercises', endpoint='exercises')
 api.add_resource(ReviewIndex, '/api/reviews', endpoint='reviews')
 api.add_resource(FavoriteIndex, '/api/favorites', endpoint='favorites')
 api.add_resource(WorkoutByID, '/api/workouts/<int:id>', endpoint='workout_by_id')
