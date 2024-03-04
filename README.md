@@ -4,7 +4,7 @@ Find your next pull day workout, or post a killer squat session for others to en
 
 ## Setup
 
-This repo is currently deployed [at this address](https://squawk-uqc5.onrender.com/) using Render.  You are welcome to fork, clone, and modify it for any purpose.  In order to run it on your own local machine, you'll need to cd to the project directory and run a few commands in the terminal:
+You are welcome to fork, clone, and modify it for any purpose.  In order to run it on your own local machine, you'll need to cd to the project directory and run a few commands in the terminal:
 ```bash
 pipenv install
 ```
